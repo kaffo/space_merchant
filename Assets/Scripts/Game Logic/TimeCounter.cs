@@ -16,7 +16,7 @@ public class TimeCounter : MonoBehaviour
         {
             timePassed += timeToPass;
             Debug.Log("Time Passed: " + timePassed);
-            if (textToUpdate != null) { textToUpdate.text = "Time Passed: " + timePassed + " hours"; }
+            if (textToUpdate != null) { textToUpdate.text = "Time Passed: " + timePassed; }
 
             if (timePassed > 25)
             {

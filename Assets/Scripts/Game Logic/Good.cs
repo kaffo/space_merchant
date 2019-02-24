@@ -91,6 +91,7 @@ public class Good : MonoBehaviour
         if (incrementQuantity(-quantity))
         {
             playerMoney.incrementPlayerCash(-price);
+            PlayerCargo.Instance.addCargo(good);
             Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + price * quantity);
             setPrice(price + 10);
             return true;

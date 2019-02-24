@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMoney : Singleton<PlayerMoney>
 {
     public int startingCash = 1000;
+    public Text moneyText;
     private int playerCash;
     // Start is called before the first frame update
     void Start()
     {
         playerCash = startingCash;
+    }
+
+    private void UpdateUI()
+    {
+        if (moneyText != null) { moneyText.text = "Money $" + playerCash; };
     }
 
     public int getPlayerCash()
@@ -22,6 +29,7 @@ public class PlayerMoney : Singleton<PlayerMoney>
         if (checkCash(newCash))
         {
             playerCash = newCash;
+            UpdateUI();
             return true;
         }
         else
@@ -35,6 +43,7 @@ public class PlayerMoney : Singleton<PlayerMoney>
         if (checkCash(playerCash + incrementCash))
         {
             playerCash += incrementCash;
+            UpdateUI();
             return true;
         } else
         {
