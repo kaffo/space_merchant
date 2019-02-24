@@ -7,6 +7,7 @@ public class TimeCounter : MonoBehaviour
 {
     public Text textToUpdate;
     public bool gameOver = false;
+
     private int timePassed = 0;
 
     public void passTime(int timeToPass)

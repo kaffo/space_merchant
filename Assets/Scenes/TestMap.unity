@@ -1396,6 +1396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textToUpdate: {fileID: 1442147402}
+  gameOver: 0
 --- !u!114 &186289146422354946 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,

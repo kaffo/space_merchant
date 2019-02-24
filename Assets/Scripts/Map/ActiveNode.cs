@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class ActiveNode : MonoBehaviour
 {
+    [Header("Game Objects")]
     public GameObject ship;
     public GameObject ring;
 
+    [Header("Materials for Ring")]
+    public Material ringHilightMaterial;
+    public Material ringAdjacentMaterial;
+
+    [Header("UI Elements")]
+    public UnityEngine.UI.Button jumpButton;
+
+    [Header("Game Manager")]
     public GameManagerFinder managerFinder;
 
     private bool isActiveNode = false;
@@ -40,7 +49,14 @@ public class ActiveNode : MonoBehaviour
     public void setRingActive(bool active)
     {
         isRingActive = active;
-        ring.SetActive(active);
+        jumpButton.interactable = active;
+        if (active)
+        {
+            ring.GetComponent<MeshRenderer>().material = ringAdjacentMaterial;
+        } else
+        {
+            ring.GetComponent<MeshRenderer>().material = ringHilightMaterial;
+        }
     }
 
     public bool getRingActive()
@@ -51,7 +67,7 @@ public class ActiveNode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ship == null || ring == null || managerFinder == null)
+        if (ship == null || ring == null || managerFinder == null || ringHilightMaterial == null || ringAdjacentMaterial == null || jumpButton == null)
         {
             Debug.LogError("Active Node Script error on " + gameObject.name);
             this.enabled = false;
@@ -59,7 +75,6 @@ public class ActiveNode : MonoBehaviour
         }
 
         ship.SetActive(isActiveNode);
-        ring.SetActive(isRingActive);
 
         timeCounter = managerFinder.gameManager.GetComponent<TimeCounter>();
     }
