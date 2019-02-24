@@ -116,8 +116,7 @@ MonoBehaviour:
   nodeScript: {fileID: 4332502710867795493}
   myConnections: {fileID: 5240076250167396683}
   managerFinder: {fileID: 7784900728682778251}
-  nodeGoods: {fileID: 0}
-  goodsButton: {fileID: 4856232238765481232, guid: cd4bcb632903e4f459eb9bc3bbd0046d,
+  goodsUIParent: {fileID: 6479740814689839605, guid: 0f43596d312347343b19e906d6f3f38c,
     type: 3}
 --- !u!1 &989706441480661657
 GameObject:

@@ -47,8 +47,12 @@ public class ActiveNode : MonoBehaviour
         // Enable/disable trade buttons
         for (int i = 0; i < goodsParent.transform.childCount; i++)
         {
-            UnityEngine.UI.Button goodButton = goodsParent.transform.GetChild(i).GetComponent<UnityEngine.UI.Button>();
-            if (goodButton != null) { goodButton.interactable = active; }
+            Transform goodParent = goodsParent.transform.GetChild(i);
+            for (int j = 0; j < goodParent.childCount; j++)
+            {
+                UnityEngine.UI.Button goodButton = goodParent.GetChild(j).GetComponent<UnityEngine.UI.Button>();
+                if (goodButton != null) { goodButton.interactable = active; }
+            }
         }
     }
 

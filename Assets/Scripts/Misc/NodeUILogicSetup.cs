@@ -16,7 +16,7 @@ public class NodeUILogicSetup : MonoBehaviour
     public GameManagerFinder managerFinder;
 
     [Header("Prefabs")]
-    public Button goodsButton; 
+    public GameObject goodsUIParent; 
 
     private TimeCounter timeCount;
     private PlayerMoney playerMoney;
@@ -25,7 +25,7 @@ public class NodeUILogicSetup : MonoBehaviour
     void Start()
     {
         if (jumpButton == null || nodeScript == null || myConnections == null || managerFinder == null 
-            || goodsParent == null || goodsButton == null)
+            || goodsParent == null || goodsUIParent == null)
         {
             Debug.LogError(gameObject.name + " UI setup script is invalid");
         }
@@ -45,22 +45,49 @@ public class NodeUILogicSetup : MonoBehaviour
         float currentHeight = 0f;
         foreach (Defs.TradeGoods good in Enum.GetValues(typeof(Defs.TradeGoods)))
         {
-            // Make a new button for each good
-            Button newButton = Instantiate<Button>(goodsButton, goodsParent.transform);
+            // Make a new prefab for each good
+            GameObject goodsPrefab = Instantiate<GameObject>(goodsUIParent, goodsParent.transform);
+            GameObject buyButtonGO = null;
+            GameObject sellButtonGO = null;
+
+            // Move the prefab so it lists 
+            goodsPrefab.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
+            currentHeight += 50f; //TODO make this not static
 
             // Set the Good script up
-            Good goodScript = newButton.GetComponent<Good>();
+            Good goodScript = goodsPrefab.GetComponent<Good>();
             if (goodScript != null) {
                 goodScript.good = good;
                 goodScript.enabled = true;
             }
 
-            // Move the button so it lists 
-            newButton.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
-            currentHeight += 50f; //TODO make this not static
+            for (int i = 0; i < goodsPrefab.transform.childCount; i++)
+            {
+                Transform currentChild = goodsPrefab.transform.GetChild(i);
+                if (currentChild.name == "GoodButtonBuy") { buyButtonGO = currentChild.gameObject; }
+                if (currentChild.name == "GoodButtonSell") { sellButtonGO = currentChild.gameObject; }
+            }
+
+            if (buyButtonGO == null || sellButtonGO == null)
+            {
+                Debug.LogError("Button setup error on " + gameObject.name);
+                this.enabled = false;
+                return;
+            }
+
+            Button buyButton = buyButtonGO.GetComponent<Button>();
+            Button sellButton = sellButtonGO.GetComponent<Button>();
+
+            if (buyButton == null || sellButton == null)
+            {
+                Debug.LogError("Button setup error on " + gameObject.name);
+                this.enabled = false;
+                return;
+            }
 
             // Setup the click logic
-            newButton.onClick.AddListener(() => GoodsBuyButtonClicked(goodScript));
+            buyButton.onClick.AddListener(() => GoodsBuyButtonClicked(goodScript));
+            sellButton.onClick.AddListener(() => GoodsSellButtonClicked(goodScript));
         }
     }
 
@@ -89,6 +116,11 @@ public class NodeUILogicSetup : MonoBehaviour
 
     private void GoodsBuyButtonClicked(Good goodScript)
     {
-        goodScript.buyGood(1);
+        goodScript.BuyGood(1);
+    }
+
+    private void GoodsSellButtonClicked(Good goodScript)
+    {
+        goodScript.SellGood(1);
     }
 }

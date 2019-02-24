@@ -6,18 +6,22 @@ using UnityEngine.UI;
 public class Good : MonoBehaviour
 {
     public Defs.TradeGoods good;
-    private int price;
+    private int buyPrice;
+    private int sellPrice;
     private int quantity;
 
-    private Text buttonText;
+    private Text goodText;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Determine Starting Price
+        // Determine Starting Buy Price
         float startPrice = Defs.Instance.goodStartPrice[good];
         float pDifference = Defs.Instance.goodPriceDifference[good];
-        price = (int)Mathf.Floor(Random.Range(startPrice - pDifference, startPrice + pDifference));
+        buyPrice = (int)Mathf.Floor(Random.Range(startPrice, startPrice + pDifference));
+
+        // Determine Starting Sell Price
+        sellPrice = (int)Mathf.Floor(Random.Range(startPrice - pDifference, startPrice));
 
         // Determine Starting Price
         int startQuatity = Defs.Instance.goodStartQuantity[good];
@@ -26,8 +30,8 @@ public class Good : MonoBehaviour
 
         // Grab the text element
         Transform buttonTextTransform = transform.GetChild(0);
-        buttonText = buttonTextTransform.GetComponent<Text>();
-        if (buttonText == null)
+        goodText = buttonTextTransform.GetComponent<Text>();
+        if (goodText == null)
         {
             Debug.LogError("Button Text can't be found on " + gameObject.name);
             this.enabled = false;
@@ -40,17 +44,17 @@ public class Good : MonoBehaviour
     public void updateUI()
     {
         // Set the text
-        buttonText.text = Defs.Instance.goodNames[good] + " - $" + price + " - " + quantity;
+        goodText.text = Defs.Instance.goodNames[good] + " - B" + buyPrice + " - S" + sellPrice + " - " + quantity;
     }
 
-    public int getPrice()
+    public int getBuyPrice()
     {
-        return price;
+        return buyPrice;
     }
 
-    public void setPrice(int newPrice)
+    public void setBuyPrice(int newPrice)
     {
-        price = newPrice;
+        buyPrice = newPrice;
         updateUI();
     }
 
@@ -79,10 +83,10 @@ public class Good : MonoBehaviour
         }
     }
 
-    public bool buyGood(int quantity)
+    public bool BuyGood(int quantity)
     {
         PlayerMoney playerMoney = PlayerMoney.Instance;
-        if (!playerMoney.checkCash(playerMoney.getPlayerCash() - quantity * price))
+        if (!playerMoney.checkCash(playerMoney.getPlayerCash() - quantity * buyPrice))
         {
             Debug.Log("Purchase Failed");
             return false;
@@ -90,15 +94,20 @@ public class Good : MonoBehaviour
         
         if (incrementQuantity(-quantity))
         {
-            playerMoney.incrementPlayerCash(-price);
+            playerMoney.incrementPlayerCash(-buyPrice);
             PlayerCargo.Instance.addCargo(good);
-            Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + price * quantity);
-            setPrice(price + 10);
+            Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + buyPrice * quantity);
+            setBuyPrice(buyPrice + 10);
             return true;
         } else
         {
             Debug.Log("Not enough goods to purchase");
             return false;
         }
+    }
+
+    public bool SellGood(int quantity)
+    {
+        return false;
     }
 }
