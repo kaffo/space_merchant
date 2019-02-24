@@ -14,6 +14,7 @@ public class ActiveNode : MonoBehaviour
 
     [Header("UI Elements")]
     public UnityEngine.UI.Button jumpButton;
+    public GameObject goodsParent;
 
     [Header("Game Manager")]
     public GameManagerFinder managerFinder;
@@ -29,15 +30,25 @@ public class ActiveNode : MonoBehaviour
         isActiveNode = active;
         ship.SetActive(active);
 
+        // Game over, so don't do any game logic
+        if (timeCounter.gameOver) { return; }
+
         // Enable/disable the adjacent nodes as clickable
         NodeConnections myNodeConnections = GetComponent<NodeConnections>();
-        if (myNodeConnections != null && !timeCounter.gameOver)
+        if (myNodeConnections != null)
         {
             foreach (var node in myNodeConnections.connectedNodes.Keys)
             {
                 ActiveNode nodeScript = node.GetComponent<ActiveNode>();
                 if (nodeScript != null) { nodeScript.setRingActive(isActiveNode); }
             }
+        }
+
+        // Enable/disable trade buttons
+        for (int i = 0; i < goodsParent.transform.childCount; i++)
+        {
+            UnityEngine.UI.Button goodButton = goodsParent.transform.GetChild(i).GetComponent<UnityEngine.UI.Button>();
+            if (goodButton != null) { goodButton.interactable = active; }
         }
     }
 
@@ -67,7 +78,8 @@ public class ActiveNode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ship == null || ring == null || managerFinder == null || ringHilightMaterial == null || ringAdjacentMaterial == null || jumpButton == null)
+        if (ship == null || ring == null || managerFinder == null || ringHilightMaterial == null || ringAdjacentMaterial == null || jumpButton == null
+            || goodsParent == null)
         {
             Debug.LogError("Active Node Script error on " + gameObject.name);
             this.enabled = false;

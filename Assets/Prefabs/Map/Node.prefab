@@ -85,6 +85,7 @@ MonoBehaviour:
   ringAdjacentMaterial: {fileID: 2100000, guid: 3e7189c4ddc950344a29451d413edf44,
     type: 2}
   jumpButton: {fileID: 7701253910869700098}
+  goodsParent: {fileID: 6917808221667141394}
   managerFinder: {fileID: 7784900728682778251}
 --- !u!114 &7784900728682778251
 MonoBehaviour:

@@ -19,6 +19,7 @@ public class NodeUILogicSetup : MonoBehaviour
     public Button goodsButton; 
 
     private TimeCounter timeCount;
+    private PlayerMoney playerMoney;
     private GameObject gameManager;
     // Start is called before the first frame update
     void Start()
@@ -33,8 +34,9 @@ public class NodeUILogicSetup : MonoBehaviour
 
         gameManager = managerFinder.gameManager;
         timeCount = gameManager.GetComponent<TimeCounter>();
+        playerMoney = gameManager.GetComponent<PlayerMoney>();
 
-        if (timeCount == null)
+        if (timeCount == null || playerMoney == null)
         {
             Debug.LogError("NodeClick error on " + transform.parent.name);
             this.enabled = false;
@@ -43,12 +45,18 @@ public class NodeUILogicSetup : MonoBehaviour
         float currentHeight = 0f;
         foreach (var good in nodeGoods.goodPrices.Keys)
         {
+            // Make a new button for each good
             Button newButton = Instantiate<Button>(goodsButton, goodsParent.transform);
+            // Grab the text element
             Transform buttonTextTransform = newButton.transform.GetChild(0);
             Text buttonText = buttonTextTransform.GetComponent<Text>();
+            // Set the text
             if (buttonText != null) { buttonText.text = nodeGoods.goodNames[good] + " - $" + nodeGoods.goodPrices[good]; }
+            // Move the button so it lists 
             newButton.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
             currentHeight += 50f; //TODO make this not static
+            // Setup the click logic
+            newButton.onClick.AddListener(GoodsBuyButtonClicked);
         }
     }
 
@@ -73,5 +81,10 @@ public class NodeUILogicSetup : MonoBehaviour
             //Enable myself
             nodeScript.setActive(true);
         }
+    }
+
+    private void GoodsBuyButtonClicked()
+    {
+        playerMoney.incrementPlayerCash(-50);
     }
 }
