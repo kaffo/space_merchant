@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4332502710867795493}
   - component: {fileID: 7784900728682778251}
   - component: {fileID: 809756613495460765}
-  - component: {fileID: 8737225352288975363}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -117,22 +116,9 @@ MonoBehaviour:
   nodeScript: {fileID: 4332502710867795493}
   myConnections: {fileID: 5240076250167396683}
   managerFinder: {fileID: 7784900728682778251}
-  nodeGoods: {fileID: 8737225352288975363}
+  nodeGoods: {fileID: 0}
   goodsButton: {fileID: 4856232238765481232, guid: cd4bcb632903e4f459eb9bc3bbd0046d,
     type: 3}
---- !u!114 &8737225352288975363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186289146422354945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51ae5227ceb417f43807eb9c18876044, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prices: 7800000064000000f4010000
 --- !u!1 &989706441480661657
 GameObject:
   m_ObjectHideFlags: 0

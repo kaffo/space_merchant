@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 7825536872260041852}
   - component: {fileID: 4534673714725089612}
   - component: {fileID: 4856232238765481232}
+  - component: {fileID: 5468884176413541368}
   m_Layer: 0
   m_Name: GoodButton
   m_TagString: Untagged
@@ -197,3 +198,15 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5468884176413541368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2233956092860273655}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84537bfceb29c2e42b375955ec32297f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
