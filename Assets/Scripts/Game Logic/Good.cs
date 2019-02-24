@@ -58,6 +58,17 @@ public class Good : MonoBehaviour
         updateUI();
     }
 
+    public int getSellPrice()
+    {
+        return sellPrice;
+    }
+
+    public void setSellPrice(int newPrice)
+    {
+        sellPrice = newPrice;
+        updateUI();
+    }
+
     public int getQuantity()
     {
         return quantity;
@@ -95,7 +106,7 @@ public class Good : MonoBehaviour
         if (incrementQuantity(-quantity))
         {
             playerMoney.incrementPlayerCash(-buyPrice);
-            PlayerCargo.Instance.addCargo(good);
+            PlayerCargo.Instance.AddSingleCargo(good);
             Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + buyPrice * quantity);
             setBuyPrice(buyPrice + 10);
             return true;
@@ -108,6 +119,17 @@ public class Good : MonoBehaviour
 
     public bool SellGood(int quantity)
     {
-        return false;
+        // Check player cargo first
+        if (PlayerCargo.Instance.HasGood(good))
+        {
+            PlayerMoney.Instance.incrementPlayerCash(sellPrice);
+            PlayerCargo.Instance.RemoveSingleCargo(good);
+            Debug.Log("Sold " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + sellPrice * quantity);
+            setSellPrice(sellPrice - 10);
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 }

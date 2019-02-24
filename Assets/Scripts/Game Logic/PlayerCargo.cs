@@ -36,7 +36,7 @@ public class PlayerCargo : Singleton<PlayerCargo>
         cargoText.text = newText;
     }
 
-    public bool addCargo(Defs.TradeGoods good)
+    public bool AddSingleCargo(Defs.TradeGoods good)
     {
         if (!CargoFull())
         {
@@ -50,11 +50,36 @@ public class PlayerCargo : Singleton<PlayerCargo>
         }
     }
 
+    public bool RemoveSingleCargo(Defs.TradeGoods good)
+    {
+        if (HasGood(good))
+        {
+            Debug.Log("Removing " + Defs.Instance.goodNames[good] + " from cargo");
+            cargo[(int)good]--;
+            UpdateUI();
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
     public bool CargoFull()
     {
         if (TotalCargo() >= size)
         {
             Debug.Log("Cargo is full, cannot add new item");
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    public bool HasGood(Defs.TradeGoods good)
+    {
+        if (cargo[(int)good] > 0)
+        {
             return true;
         } else
         {
