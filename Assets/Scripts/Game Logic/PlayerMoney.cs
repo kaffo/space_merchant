@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoney : MonoBehaviour
+public class PlayerMoney : Singleton<PlayerMoney>
 {
     public int startingCash = 1000;
     private int playerCash;
@@ -42,7 +42,7 @@ public class PlayerMoney : MonoBehaviour
         }
     }
 
-    private bool checkCash(int newCash)
+    public bool checkCash(int newCash)
     {
         if (newCash < 0)
         {
@@ -50,7 +50,6 @@ public class PlayerMoney : MonoBehaviour
             return false;
         } else
         {
-            Debug.Log("New Player cash: " + newCash.ToString());
             return true;
         }
     }

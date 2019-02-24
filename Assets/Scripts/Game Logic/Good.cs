@@ -9,6 +9,8 @@ public class Good : MonoBehaviour
     private int price;
     private int quantity;
 
+    private Text buttonText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,29 +26,78 @@ public class Good : MonoBehaviour
 
         // Grab the text element
         Transform buttonTextTransform = transform.GetChild(0);
-        Text buttonText = buttonTextTransform.GetComponent<Text>();
+        buttonText = buttonTextTransform.GetComponent<Text>();
+        if (buttonText == null)
+        {
+            Debug.LogError("Button Text can't be found on " + gameObject.name);
+            this.enabled = false;
+            return;
+        }
 
-        // Set the text
-        if (buttonText != null) { buttonText.text = Defs.Instance.goodNames[good] + " - $" + price + " - " + quantity; }
+        updateUI();
     }
 
-    int getPrice()
+    public void updateUI()
+    {
+        // Set the text
+        buttonText.text = Defs.Instance.goodNames[good] + " - $" + price + " - " + quantity;
+    }
+
+    public int getPrice()
     {
         return price;
     }
 
-    void setPrice(int newPrice)
+    public void setPrice(int newPrice)
     {
         price = newPrice;
+        updateUI();
     }
 
-    int getQuantity()
+    public int getQuantity()
     {
         return quantity;
     }
 
-    void setQuantity(int newQuantity)
+    public void setQuantity(int newQuantity)
     {
         quantity = newQuantity;
+        updateUI();
+    }
+
+    public bool incrementQuantity(int incrementQuantity)
+    {
+        if (quantity + incrementQuantity >= 0)
+        {
+            quantity += incrementQuantity;
+            updateUI();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool buyGood(int quantity)
+    {
+        PlayerMoney playerMoney = PlayerMoney.Instance;
+        if (!playerMoney.checkCash(playerMoney.getPlayerCash() - quantity * price))
+        {
+            Debug.Log("Purchase Failed");
+            return false;
+        }
+        
+        if (incrementQuantity(-quantity))
+        {
+            playerMoney.incrementPlayerCash(-price);
+            Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + price * quantity);
+            setPrice(price + 10);
+            return true;
+        } else
+        {
+            Debug.Log("Not enough goods to purchase");
+            return false;
+        }
     }
 }

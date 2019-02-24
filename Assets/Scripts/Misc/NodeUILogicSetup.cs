@@ -60,7 +60,7 @@ public class NodeUILogicSetup : MonoBehaviour
             currentHeight += 50f; //TODO make this not static
 
             // Setup the click logic
-            newButton.onClick.AddListener(GoodsBuyButtonClicked);
+            newButton.onClick.AddListener(() => GoodsBuyButtonClicked(goodScript));
         }
     }
 
@@ -87,8 +87,8 @@ public class NodeUILogicSetup : MonoBehaviour
         }
     }
 
-    private void GoodsBuyButtonClicked()
+    private void GoodsBuyButtonClicked(Good goodScript)
     {
-        playerMoney.incrementPlayerCash(-50);
+        goodScript.buyGood(1);
     }
 }
