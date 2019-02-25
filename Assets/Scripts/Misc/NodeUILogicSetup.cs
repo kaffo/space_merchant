@@ -38,7 +38,7 @@ public class NodeUILogicSetup : MonoBehaviour
 
             // Move the prefab so it lists 
             goodsPrefab.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
-            currentHeight += 50f; //TODO make this not static
+            currentHeight += 100f; //TODO make this not static
 
             // Set the Good script up
             Good goodScript = goodsPrefab.GetComponent<Good>();

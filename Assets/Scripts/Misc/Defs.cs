@@ -20,15 +20,15 @@ public class Defs : Singleton<Defs>
 
     // Good Prices
     public Dictionary<TradeGoods, float> goodStartPrice = new Dictionary<TradeGoods, float>() {
-        { TradeGoods.GOOD_FOOD, 100f},
+        { TradeGoods.GOOD_FOOD, 20},
         { TradeGoods.GOOD_FUEL, 120f},
         { TradeGoods.GOOD_FIREWORKS, 300f}
     };
 
     public Dictionary<TradeGoods, float> goodPriceDifference = new Dictionary<TradeGoods, float>() {
-        { TradeGoods.GOOD_FOOD, 10f},
-        { TradeGoods.GOOD_FUEL, 25f},
-        { TradeGoods.GOOD_FIREWORKS, 50f}
+        { TradeGoods.GOOD_FOOD, 8f},
+        { TradeGoods.GOOD_FUEL, 30f},
+        { TradeGoods.GOOD_FIREWORKS, 75f}
     };
 
     //Good Quantities

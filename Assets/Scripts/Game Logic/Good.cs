@@ -6,12 +6,17 @@ using UnityEngine.UI;
 public class Good : MonoBehaviour
 {
     public Defs.TradeGoods good;
+
+    public Text buyText;
+    public Text sellText;
+
     private int buyPrice;
     private int sellPrice;
-    private int quantity;
+    private int buyQuantity;
+    private int sellQuantity;
 
     private Text goodText;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +31,13 @@ public class Good : MonoBehaviour
         // Determine Starting Price
         int startQuatity = Defs.Instance.goodStartQuantity[good];
         int qDifference = Defs.Instance.goodQuantityDifference[good];
-        quantity = (int)Mathf.Floor(Random.Range(startQuatity - qDifference, startQuatity + qDifference));
+        buyQuantity = (int)Mathf.Floor(Random.Range(startQuatity - qDifference, startQuatity + qDifference));
+        sellQuantity = (int)Mathf.Floor(Random.Range(startQuatity - qDifference, startQuatity + qDifference));
 
         // Grab the text element
         Transform buttonTextTransform = transform.GetChild(0);
         goodText = buttonTextTransform.GetComponent<Text>();
-        if (goodText == null)
+        if (goodText == null || buyText == null || sellText == null)
         {
             Debug.LogError("Button Text can't be found on " + gameObject.name);
             this.enabled = false;
@@ -44,7 +50,9 @@ public class Good : MonoBehaviour
     public void updateUI()
     {
         // Set the text
-        goodText.text = Defs.Instance.goodNames[good] + " - B" + buyPrice + " - S" + sellPrice + " - " + quantity;
+        goodText.text = Defs.Instance.goodNames[good];
+        buyText.text = buyQuantity + " - B - " + buyPrice;
+        sellText.text = sellQuantity + " - S - " + sellPrice;
     }
 
     public int getBuyPrice()
@@ -69,22 +77,47 @@ public class Good : MonoBehaviour
         updateUI();
     }
 
-    public int getQuantity()
+    public int getBuyQuantity()
     {
-        return quantity;
+        return buyQuantity;
     }
 
-    public void setQuantity(int newQuantity)
+    public void setBuyQuantity(int newQuantity)
     {
-        quantity = newQuantity;
+        buyQuantity = newQuantity;
         updateUI();
     }
 
-    public bool incrementQuantity(int incrementQuantity)
+    public bool incrementBuyQuantity(int incrementQuantity)
     {
-        if (quantity + incrementQuantity >= 0)
+        if (buyQuantity + incrementQuantity >= 0)
         {
-            quantity += incrementQuantity;
+            buyQuantity += incrementQuantity;
+            updateUI();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int getSellQuantity()
+    {
+        return sellQuantity;
+    }
+
+    public void setSellQuantity(int newQuantity)
+    {
+        sellQuantity = newQuantity;
+        updateUI();
+    }
+
+    public bool incrementSellQuantity(int incrementQuantity)
+    {
+        if (sellQuantity + incrementQuantity >= 0)
+        {
+            sellQuantity += incrementQuantity;
             updateUI();
             return true;
         }
@@ -103,7 +136,7 @@ public class Good : MonoBehaviour
             return false;
         }
         
-        if (incrementQuantity(-quantity))
+        if (incrementBuyQuantity(-quantity))
         {
             playerMoney.incrementPlayerCash(-buyPrice);
             PlayerCargo.Instance.AddSingleCargo(good);
