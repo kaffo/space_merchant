@@ -23,15 +23,16 @@ public class ActiveNode : MonoBehaviour
 
     private bool isRingActive = false;
 
-    private TimeCounter timeCounter;
-
     public void setActive(bool active)
     {
         isActiveNode = active;
         ship.SetActive(active);
 
+        // Tell ObjectManager if I'm the new active node
+        if (active) { ObjectManager.Instance.currentActiveNode = this; }
+
         // Game over, so don't do any game logic
-        if (timeCounter.gameOver) { return; }
+        if (TimeCounter.Instance.gameOver) { return; }
 
         // Enable/disable the adjacent nodes as clickable
         NodeConnections myNodeConnections = GetComponent<NodeConnections>();
@@ -91,7 +92,5 @@ public class ActiveNode : MonoBehaviour
         }
 
         ship.SetActive(isActiveNode);
-
-        timeCounter = managerFinder.gameManager.GetComponent<TimeCounter>();
     }
 }

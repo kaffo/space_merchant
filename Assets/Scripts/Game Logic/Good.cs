@@ -18,10 +18,10 @@ public class Good : MonoBehaviour
         // Determine Starting Buy Price
         float startPrice = Defs.Instance.goodStartPrice[good];
         float pDifference = Defs.Instance.goodPriceDifference[good];
-        buyPrice = (int)Mathf.Floor(Random.Range(startPrice, startPrice + pDifference));
+        buyPrice = (int)Mathf.Floor(Random.Range(startPrice - pDifference, startPrice + pDifference));
 
         // Determine Starting Sell Price
-        sellPrice = (int)Mathf.Floor(Random.Range(startPrice - pDifference, startPrice));
+        sellPrice = (int)Mathf.Floor(Random.Range(startPrice - pDifference, startPrice + pDifference));
 
         // Determine Starting Price
         int startQuatity = Defs.Instance.goodStartQuantity[good];

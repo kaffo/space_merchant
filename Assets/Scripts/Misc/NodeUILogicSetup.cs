@@ -13,34 +13,20 @@ public class NodeUILogicSetup : MonoBehaviour
     [Header("Scripts")]
     public ActiveNode nodeScript;
     public NodeConnections myConnections;
-    public GameManagerFinder managerFinder;
 
     [Header("Prefabs")]
     public GameObject goodsUIParent; 
 
-    private TimeCounter timeCount;
-    private PlayerMoney playerMoney;
-    private GameObject gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        if (jumpButton == null || nodeScript == null || myConnections == null || managerFinder == null 
+        if (jumpButton == null || nodeScript == null || myConnections == null 
             || goodsParent == null || goodsUIParent == null)
         {
             Debug.LogError(gameObject.name + " UI setup script is invalid");
         }
 
         jumpButton.onClick.AddListener(JumpButtonClick);
-
-        gameManager = managerFinder.gameManager;
-        timeCount = gameManager.GetComponent<TimeCounter>();
-        playerMoney = gameManager.GetComponent<PlayerMoney>();
-
-        if (timeCount == null || playerMoney == null)
-        {
-            Debug.LogError("NodeClick error on " + transform.parent.name);
-            this.enabled = false;
-        }
 
         float currentHeight = 0f;
         foreach (Defs.TradeGoods good in Enum.GetValues(typeof(Defs.TradeGoods)))
@@ -94,18 +80,22 @@ public class NodeUILogicSetup : MonoBehaviour
 
     private void JumpButtonClick()
     {
-        if (nodeScript.getRingActive() && !timeCount.gameOver)
+        if (nodeScript.getRingActive() && !TimeCounter.Instance.gameOver)
         {
-            // Find the current active node and disable it
-            foreach (var node in myConnections.connectedNodes.Keys)
-            {
-                ActiveNode otherNodeScript = node.GetComponent<ActiveNode>();
+            // Get the current active node and disable it
+            ActiveNode currentActiveNode = ObjectManager.Instance.currentActiveNode;
 
-                if (otherNodeScript != null && otherNodeScript.getActive())
+            if (currentActiveNode != null && currentActiveNode.getActive())
+            {
+                currentActiveNode.setActive(false);
+
+                NodeConnections currentActiveNodeConnections = currentActiveNode.GetComponent<NodeConnections>();
+                if (currentActiveNodeConnections != null && currentActiveNodeConnections.connectedNodes.ContainsKey(myConnections))
                 {
-                    otherNodeScript.setActive(false);
-                    timeCount.passTime(node.connectedNodes[myConnections]);
-                    break;
+                    TimeCounter.Instance.passTime(currentActiveNodeConnections.connectedNodes[myConnections]);
+                } else
+                {
+                    Debug.LogError("Error getting Current Active Node Connections on " + transform.parent.name);
                 }
             }
 

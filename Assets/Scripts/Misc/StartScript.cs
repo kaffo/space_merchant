@@ -8,12 +8,10 @@ public class StartScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (startNode) { startNode.setActive(true); }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (startNode)
+        {
+            startNode.setActive(true);
+            ObjectManager.Instance.currentActiveNode = startNode;
+        }
     }
 }

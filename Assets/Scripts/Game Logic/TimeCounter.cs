@@ -3,32 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeCounter : MonoBehaviour
+public class TimeCounter : Singleton<TimeCounter>
 {
     public Text textToUpdate;
     public bool gameOver = false;
 
-    private int timePassed = 0;
+    private int timeLeft = 25;
+
+    private void UpdateUI()
+    {
+        if (timeLeft <= 0)
+        {
+            Debug.Log("Your Father Has Died...");
+            if (textToUpdate != null) { textToUpdate.text = "Your Father has died..."; }
+            gameOver = true;
+        } else
+        {
+            if (textToUpdate != null) { textToUpdate.text = "Time Left: " + timeLeft; }
+        }
+    }
 
     public void passTime(int timeToPass)
     {
         if (!gameOver)
         {
-            timePassed += timeToPass;
-            Debug.Log("Time Passed: " + timePassed);
-            if (textToUpdate != null) { textToUpdate.text = "Time Passed: " + timePassed; }
+            // Can't have less than 0 time
+            timeLeft = (int)Mathf.Max(timeLeft - timeToPass, 0f);
 
-            if (timePassed > 25)
-            {
-                Debug.Log("Your Father Has Died...");
-                if (textToUpdate != null) { textToUpdate.text = "Your Father has died..."; }
-                gameOver = true;
-            }
+            Debug.Log("Time Left: " + timeLeft);
+            UpdateUI();
+        }
+    }
+
+    public void addTime(int timeToAdd)
+    {
+        if (!gameOver)
+        {
+            timeLeft += timeToAdd;
+            Debug.Log("Time Left: " + timeLeft);
+            UpdateUI();
         }
     }
      
-    public int currentTimePassed()
+    public int currentTimeLeft()
     {
-        return timePassed;
+        return timeLeft;
     }
 }

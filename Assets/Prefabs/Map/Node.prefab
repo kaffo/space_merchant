@@ -115,7 +115,6 @@ MonoBehaviour:
   goodsParent: {fileID: 6917808221667141394}
   nodeScript: {fileID: 4332502710867795493}
   myConnections: {fileID: 5240076250167396683}
-  managerFinder: {fileID: 7784900728682778251}
   goodsUIParent: {fileID: 6479740814689839605, guid: 0f43596d312347343b19e906d6f3f38c,
     type: 3}
 --- !u!1 &989706441480661657
@@ -223,6 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodePanel: {fileID: 5531432800677030546}
+  activeNodeScript: {fileID: 4332502710867795493}
+  myConnections: {fileID: 5240076250167396683}
 --- !u!1 &1732314599139276008
 GameObject:
   m_ObjectHideFlags: 0
