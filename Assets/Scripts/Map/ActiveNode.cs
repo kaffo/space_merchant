@@ -44,17 +44,6 @@ public class ActiveNode : MonoBehaviour
                 if (nodeScript != null) { nodeScript.setRingActive(isActiveNode); }
             }
         }
-
-        // Enable/disable trade buttons
-        for (int i = 0; i < goodsParent.transform.childCount; i++)
-        {
-            Transform goodParent = goodsParent.transform.GetChild(i);
-            for (int j = 0; j < goodParent.childCount; j++)
-            {
-                UnityEngine.UI.Button goodButton = goodParent.GetChild(j).GetComponent<UnityEngine.UI.Button>();
-                if (goodButton != null) { goodButton.interactable = active; }
-            }
-        }
     }
 
     public bool getActive()

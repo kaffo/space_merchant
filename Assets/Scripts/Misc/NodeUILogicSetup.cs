@@ -33,8 +33,6 @@ public class NodeUILogicSetup : MonoBehaviour
         {
             // Make a new prefab for each good
             GameObject goodsPrefab = Instantiate<GameObject>(goodsUIParent, goodsParent.transform);
-            GameObject buyButtonGO = null;
-            GameObject sellButtonGO = null;
 
             // Move the prefab so it lists 
             goodsPrefab.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
@@ -44,25 +42,12 @@ public class NodeUILogicSetup : MonoBehaviour
             Good goodScript = goodsPrefab.GetComponent<Good>();
             if (goodScript != null) {
                 goodScript.good = good;
+                goodScript.activeNodeScript = nodeScript;
                 goodScript.enabled = true;
             }
 
-            for (int i = 0; i < goodsPrefab.transform.childCount; i++)
-            {
-                Transform currentChild = goodsPrefab.transform.GetChild(i);
-                if (currentChild.name == "GoodButtonBuy") { buyButtonGO = currentChild.gameObject; }
-                if (currentChild.name == "GoodButtonSell") { sellButtonGO = currentChild.gameObject; }
-            }
-
-            if (buyButtonGO == null || sellButtonGO == null)
-            {
-                Debug.LogError("Button setup error on " + gameObject.name);
-                this.enabled = false;
-                return;
-            }
-
-            Button buyButton = buyButtonGO.GetComponent<Button>();
-            Button sellButton = sellButtonGO.GetComponent<Button>();
+            Button buyButton = goodScript.buyButton;
+            Button sellButton = goodScript.sellButton;
 
             if (buyButton == null || sellButton == null)
             {
@@ -101,6 +86,12 @@ public class NodeUILogicSetup : MonoBehaviour
 
             //Enable myself
             nodeScript.setActive(true);
+
+            // Update all Goods UI
+            foreach (var good in ObjectManager.Instance.globalGoodList)
+            {
+                good.updateUI();
+            }
         }
     }
 

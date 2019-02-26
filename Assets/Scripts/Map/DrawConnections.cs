@@ -19,8 +19,20 @@ public class DrawConnections : MonoBehaviour
         {
             GameObject child = new GameObject(node.gameObject.name + " Connection");
             child.transform.SetParent(transform);
+            child.transform.localPosition = Vector3.zero;
+
             LineRenderer lrender = child.AddComponent<LineRenderer>();
-            Vector3[] positionList = { gameObject.transform.position, node.gameObject.transform.position };
+            Vector3 myPos = gameObject.transform.position;
+            Vector3 otherNodePos = node.gameObject.transform.position;
+            Vector3 middlePos = new Vector3((myPos.x + otherNodePos.x)/2, (myPos.y + otherNodePos.y) / 2, 5f);
+
+            Vector3 myPerpVector = Vector3.Cross(middlePos - myPos, otherNodePos - myPos).normalized * 0.4f;
+            Vector3 otherPerpVector = Vector3.Cross(myPos - otherNodePos, middlePos - otherNodePos).normalized * 0.4f;
+
+            myPos = myPos + myPerpVector;
+            otherNodePos = otherNodePos + otherPerpVector;
+
+            Vector3[] positionList = { myPos, otherNodePos };
             lrender.SetPositions(positionList);
             lrender.startWidth = lrender.endWidth = 0.2f;
             if (lineWhite != null)

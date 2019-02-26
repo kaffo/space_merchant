@@ -5,10 +5,17 @@ using UnityEngine.UI;
 
 public class Good : MonoBehaviour
 {
+    [Header("Good Setup")]
     public Defs.TradeGoods good;
 
+    [Header("UI Elements")]
     public Text buyText;
+    public Button buyButton;
     public Text sellText;
+    public Button sellButton;
+
+    [Header("Scripts")]
+    public ActiveNode activeNodeScript;
 
     private int buyPrice;
     private int sellPrice;
@@ -20,6 +27,16 @@ public class Good : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (activeNodeScript == null)
+        {
+            Debug.LogError("Good script error on " + gameObject.name);
+            this.enabled = false;
+            return;
+        }
+
+        // Add myself to the global good list
+        ObjectManager.Instance.globalGoodList.Add(this);
+
         // Determine Starting Buy Price
         float startPrice = Defs.Instance.goodStartPrice[good];
         float pDifference = Defs.Instance.goodPriceDifference[good];
@@ -37,7 +54,7 @@ public class Good : MonoBehaviour
         // Grab the text element
         Transform buttonTextTransform = transform.GetChild(0);
         goodText = buttonTextTransform.GetComponent<Text>();
-        if (goodText == null || buyText == null || sellText == null)
+        if (goodText == null || buyText == null || buyButton  == null || sellText == null || sellButton == null)
         {
             Debug.LogError("Button Text can't be found on " + gameObject.name);
             this.enabled = false;
@@ -49,10 +66,29 @@ public class Good : MonoBehaviour
 
     public void updateUI()
     {
-        // Set the text
+        // Set good text
         goodText.text = Defs.Instance.goodNames[good];
+
+        // Set buy text and button state
         buyText.text = buyQuantity + " - B - " + buyPrice;
+        if (buyQuantity > 0 && activeNodeScript.getActive())
+        {
+            buyButton.interactable = true;
+        } else
+        {
+            buyButton.interactable = false;
+        }
+
+        // Set sell text and button state
         sellText.text = sellQuantity + " - S - " + sellPrice;
+        if (sellQuantity > 0 && activeNodeScript.getActive())
+        {
+            sellButton.interactable = true;
+        }
+        else
+        {
+            sellButton.interactable = false;
+        }
     }
 
     public int getBuyPrice()
@@ -62,7 +98,7 @@ public class Good : MonoBehaviour
 
     public void setBuyPrice(int newPrice)
     {
-        buyPrice = newPrice;
+        buyPrice = (int)Mathf.Clamp(newPrice, Defs.Instance.goodMinPrice[good], Defs.Instance.goodMaxPrice[good]);
         updateUI();
     }
 
@@ -73,7 +109,7 @@ public class Good : MonoBehaviour
 
     public void setSellPrice(int newPrice)
     {
-        sellPrice = newPrice;
+        sellPrice = (int)Mathf.Clamp(newPrice, Defs.Instance.goodMinPrice[good], Defs.Instance.goodMaxPrice[good]);
         updateUI();
     }
 
@@ -153,11 +189,12 @@ public class Good : MonoBehaviour
     public bool SellGood(int quantity)
     {
         // Check player cargo first
-        if (PlayerCargo.Instance.HasGood(good))
+        if (PlayerCargo.Instance.HasGood(good) && incrementSellQuantity(-quantity))
         {
             PlayerMoney.Instance.incrementPlayerCash(sellPrice);
             PlayerCargo.Instance.RemoveSingleCargo(good);
             Debug.Log("Sold " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + sellPrice * quantity);
+            //TODO subclass price change
             setSellPrice(sellPrice - 10);
             return true;
         } else

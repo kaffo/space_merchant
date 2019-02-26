@@ -329,7 +329,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   good: 0
   buyText: {fileID: 3508568249986921496}
+  buyButton: {fileID: 4979857880482503379}
   sellText: {fileID: 9205861317316638280}
+  sellButton: {fileID: 1532659720629267847}
 --- !u!1 &7150947412818472261
 GameObject:
   m_ObjectHideFlags: 0
