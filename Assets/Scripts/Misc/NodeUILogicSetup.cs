@@ -6,25 +6,63 @@ using UnityEngine.UI;
 
 public class NodeUILogicSetup : MonoBehaviour
 {
+    [Header("Game Elements")]
+    public GameObject mapParentObject;
+
     [Header("UI Elements")]
     public Button jumpButton;
     public GameObject goodsParent;
+    public Text nodeNameText;
 
     [Header("Scripts")]
     public ActiveNode nodeScript;
     public NodeConnections myConnections;
+    public NodeClick nodeClickScript;
 
     [Header("Prefabs")]
-    public GameObject goodsUIParent; 
+    public GameObject goodsUIParent;
+    public GameObject panelPrefab;
+
+    private NodePanelReferences myPanelReferenceScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (jumpButton == null || nodeScript == null || myConnections == null 
-            || goodsParent == null || goodsUIParent == null)
+        if (nodeScript == null || myConnections == null || goodsUIParent == null || panelPrefab == null || mapParentObject == null
+            || nodeClickScript == null)
         {
             Debug.LogError(gameObject.name + " UI setup script is invalid");
+            this.enabled = false;
+            return;
         }
+
+        GameObject myPanelObject = Instantiate(panelPrefab, mapParentObject.transform);
+        myPanelObject.transform.position = transform.position;
+
+        myPanelReferenceScript = myPanelObject.GetComponent<NodePanelReferences>();
+        if(myPanelReferenceScript == null)
+        {
+            Debug.LogError(gameObject.name + " UI setup script is invalid");
+            this.enabled = false;
+            return;
+        }
+
+        jumpButton = myPanelReferenceScript.jumpButton;
+        goodsParent = myPanelReferenceScript.goodsParent;
+        nodeNameText = myPanelReferenceScript.nodeNameText;
+
+        if (jumpButton == null || nodeNameText == null || goodsParent == null)
+        {
+            Debug.LogError(gameObject.name + " UI setup script is invalid");
+            this.enabled = false;
+            return;
+        }
+
+        nodeClickScript.nodePanel = myPanelObject;
+        nodeScript.jumpButton = jumpButton;
+        nodeScript.goodsParent = goodsParent;
+
+        nodeNameText.text = gameObject.name;
 
         jumpButton.onClick.AddListener(JumpButtonClick);
 
