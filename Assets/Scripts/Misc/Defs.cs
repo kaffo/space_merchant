@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,18 @@ public class Defs : Singleton<Defs>
         GOOD_FOOD = 0,
         GOOD_FUEL = 1,
         GOOD_FIREWORKS = 2
+    }
+
+    // Good Scripts
+    public Good AddGoodScript(TradeGoods good, GameObject parent)
+    {
+        switch (good)
+        {
+            case TradeGoods.GOOD_FOOD:
+                return parent.AddComponent<Food>();
+            default:
+                return parent.AddComponent<Good>();
+        }
     }
 
     // Good Names

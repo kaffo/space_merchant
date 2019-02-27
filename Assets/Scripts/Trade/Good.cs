@@ -7,15 +7,10 @@ public class Good : MonoBehaviour
 {
     [Header("Good Setup")]
     public Defs.TradeGoods good;
-
-    [Header("UI Elements")]
-    public Text buyText;
-    public Button buyButton;
-    public Text sellText;
-    public Button sellButton;
-
+    
     [Header("Scripts")]
     public ActiveNode activeNodeScript;
+    public GoodUIReferences myUIReferences;
 
     private int buyPrice;
     private int sellPrice;
@@ -23,11 +18,15 @@ public class Good : MonoBehaviour
     private int sellQuantity;
 
     private Text goodText;
-    
+    private Text buyText;
+    private Button buyButton;
+    private Text sellText;
+    private Button sellButton;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (activeNodeScript == null)
+        if (activeNodeScript == null || myUIReferences == null)
         {
             Debug.LogError("Good script error on " + gameObject.name);
             this.enabled = false;
@@ -51,9 +50,13 @@ public class Good : MonoBehaviour
         buyQuantity = (int)Mathf.Floor(Random.Range(startQuatity - qDifference, startQuatity + qDifference));
         sellQuantity = (int)Mathf.Floor(Random.Range(startQuatity - qDifference, startQuatity + qDifference));
 
-        // Grab the text element
-        Transform buttonTextTransform = transform.GetChild(0);
-        goodText = buttonTextTransform.GetComponent<Text>();
+        // Get UI elements from reference script
+        goodText = myUIReferences.goodText;
+        buyText = myUIReferences.buyText;
+        buyButton = myUIReferences.buyButton;
+        sellText = myUIReferences.sellText;
+        sellButton = myUIReferences.sellButton;
+
         if (goodText == null || buyText == null || buyButton  == null || sellText == null || sellButton == null)
         {
             Debug.LogError("Button Text can't be found on " + gameObject.name);

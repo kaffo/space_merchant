@@ -78,16 +78,25 @@ public class NodeUILogicSetup : MonoBehaviour
             goodsPrefab.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
             currentHeight += 80f; //TODO make this not static
 
+            GoodUIReferences goodUIReferences = goodsPrefab.GetComponent<GoodUIReferences>();
+            if (goodUIReferences == null)
+            {
+                Debug.LogError("Setup error on " + gameObject.name);
+                this.enabled = false;
+                return;
+            }
+
             // Set the Good script up
-            Good goodScript = goodsPrefab.GetComponent<Good>();
+            Good goodScript = Defs.Instance.AddGoodScript(good, goodsPrefab);
             if (goodScript != null) {
                 goodScript.good = good;
                 goodScript.activeNodeScript = nodeScript;
+                goodScript.myUIReferences = goodUIReferences;
                 goodScript.enabled = true;
             }
 
-            Button buyButton = goodScript.buyButton;
-            Button sellButton = goodScript.sellButton;
+            Button buyButton = goodUIReferences.buyButton;
+            Button sellButton = goodUIReferences.sellButton;
 
             if (buyButton == null || sellButton == null)
             {
