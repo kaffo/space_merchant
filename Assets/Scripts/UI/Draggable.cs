@@ -15,8 +15,7 @@ public class Draggable : MonoBehaviour, IDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        m_transform.position += new Vector3(eventData.delta.x, eventData.delta.y);
-
+        m_transform.position += new Vector3(eventData.delta.x * 0.02f, eventData.delta.y * 0.02f);
         // magic : add zone clamping if's here.
     }
 }
