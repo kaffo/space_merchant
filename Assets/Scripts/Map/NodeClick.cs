@@ -53,7 +53,9 @@ public class NodeClick : MonoBehaviour
                 NodeConnections currentActiveNodeConnections = currentActiveNode.GetComponent<NodeConnections>();
                 if (currentActiveNodeConnections != null && currentActiveNodeConnections.connectedNodes.ContainsKey(myConnections))
                 {
-                    timeToThisNode = currentActiveNodeConnections.connectedNodes[myConnections];
+                    // Work out the time to pass based off the distance and the engine speed
+                    float currentEngineSpeed = Defs.Instance.engineUpgradesSpeeds[PlayerCargo.Instance.GetCurrentEngine()];
+                    timeToThisNode = (int)(currentActiveNodeConnections.connectedNodes[myConnections] * currentEngineSpeed);
                 }
             }
 

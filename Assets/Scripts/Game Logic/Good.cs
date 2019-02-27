@@ -70,7 +70,7 @@ public class Good : MonoBehaviour
         goodText.text = Defs.Instance.goodNames[good];
 
         // Set buy text and button state
-        buyText.text = buyQuantity + " - B - " + buyPrice;
+        buyText.text = buyQuantity + " - B - $" + buyPrice;
         if (buyQuantity > 0 && activeNodeScript.getActive() && !TimeCounter.Instance.gameOver)
         {
             buyButton.interactable = true;
@@ -80,7 +80,7 @@ public class Good : MonoBehaviour
         }
 
         // Set sell text and button state
-        sellText.text = sellQuantity + " - S - " + sellPrice;
+        sellText.text = sellQuantity + " - S - $" + sellPrice;
         if (sellQuantity > 0 && activeNodeScript.getActive() && !TimeCounter.Instance.gameOver)
         {
             sellButton.interactable = true;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3822574821613645366}
   - component: {fileID: 5240076250167396683}
+  - component: {fileID: 5676157850795022395}
   - component: {fileID: 6451999816789755996}
   - component: {fileID: 4332502710867795493}
   - component: {fileID: 7784900728682778251}
@@ -52,6 +53,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect: []
   timeToTravel: 
+--- !u!114 &5676157850795022395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186289146422354945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avaliableTradeGoods: 000000000100000002000000
+  avalaibleEngineUpgrades: 
 --- !u!114 &6451999816789755996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,10 +129,13 @@ MonoBehaviour:
   jumpButton: {fileID: 0}
   goodsParent: {fileID: 0}
   nodeNameText: {fileID: 0}
+  nodeParametersScript: {fileID: 5676157850795022395}
   nodeScript: {fileID: 4332502710867795493}
   myConnections: {fileID: 5240076250167396683}
   nodeClickScript: {fileID: 2526924377091796398}
   goodsUIParent: {fileID: 6479740814689839605, guid: 0f43596d312347343b19e906d6f3f38c,
+    type: 3}
+  upgradeUIParent: {fileID: 6479740814689839605, guid: f9b1419eff282724ca02ef183193094f,
     type: 3}
   panelPrefab: {fileID: 1600354488361494846, guid: 8fb73f30241fbf84b81ce2ea8ecdd55f,
     type: 3}

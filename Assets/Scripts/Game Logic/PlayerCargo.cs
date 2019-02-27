@@ -8,7 +8,9 @@ public class PlayerCargo : Singleton<PlayerCargo>
 {
     public int size = 6;
     public Text cargoText;
+
     private int[] cargo;
+    private Defs.EngineUpgrades currentEngine = Defs.EngineUpgrades.ENGINEUPRADE_DEFAULT;
 
     // Start is called before the first frame update
     void Start()
@@ -100,5 +102,20 @@ public class PlayerCargo : Singleton<PlayerCargo>
         }
 
         return total;
+    }
+
+    public bool PlayerHasUpgrade(Defs.EngineUpgrades engineUpgrade)
+    {
+        return currentEngine == engineUpgrade;
+    }
+
+    public Defs.EngineUpgrades GetCurrentEngine()
+    {
+        return currentEngine;
+    }
+
+    public void UpgradeCurrentEngine(Defs.EngineUpgrades engineUpgrade)
+    {
+        currentEngine = engineUpgrade;
     }
 }

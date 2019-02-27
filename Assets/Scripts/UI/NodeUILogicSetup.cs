@@ -15,12 +15,14 @@ public class NodeUILogicSetup : MonoBehaviour
     public Text nodeNameText;
 
     [Header("Scripts")]
+    public NodeParameters nodeParametersScript;
     public ActiveNode nodeScript;
     public NodeConnections myConnections;
     public NodeClick nodeClickScript;
 
     [Header("Prefabs")]
     public GameObject goodsUIParent;
+    public GameObject upgradeUIParent;
     public GameObject panelPrefab;
 
     private NodePanelReferences myPanelReferenceScript;
@@ -28,8 +30,8 @@ public class NodeUILogicSetup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (nodeScript == null || myConnections == null || goodsUIParent == null || panelPrefab == null || mapParentObject == null
-            || nodeClickScript == null)
+        if (nodeParametersScript == null || nodeScript == null || myConnections == null || goodsUIParent == null || panelPrefab == null
+            || upgradeUIParent == null || mapParentObject == null || nodeClickScript == null)
         {
             Debug.LogError(gameObject.name + " UI setup script is invalid");
             this.enabled = false;
@@ -67,14 +69,14 @@ public class NodeUILogicSetup : MonoBehaviour
         jumpButton.onClick.AddListener(JumpButtonClick);
 
         float currentHeight = 0f;
-        foreach (Defs.TradeGoods good in Enum.GetValues(typeof(Defs.TradeGoods)))
+        foreach (Defs.TradeGoods good in nodeParametersScript.avaliableTradeGoods)
         {
             // Make a new prefab for each good
             GameObject goodsPrefab = Instantiate<GameObject>(goodsUIParent, goodsParent.transform);
 
             // Move the prefab so it lists 
             goodsPrefab.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
-            currentHeight += 100f; //TODO make this not static
+            currentHeight += 80f; //TODO make this not static
 
             // Set the Good script up
             Good goodScript = goodsPrefab.GetComponent<Good>();
@@ -98,6 +100,36 @@ public class NodeUILogicSetup : MonoBehaviour
             buyButton.onClick.AddListener(() => GoodsBuyButtonClicked(goodScript));
             sellButton.onClick.AddListener(() => GoodsSellButtonClicked(goodScript));
         }
+
+        foreach (Defs.EngineUpgrades engineUpgrade in nodeParametersScript.avalaibleEngineUpgrades)
+        {
+            GameObject upgradePrefab = Instantiate(upgradeUIParent, goodsParent.transform);
+
+            // Move the prefab so it lists 
+            upgradePrefab.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
+            currentHeight += 80f; //TODO make this not static
+
+            // Set the Good script up
+            Upgrade upgradeScript = upgradePrefab.GetComponent<Upgrade>();
+            if (upgradeScript != null)
+            {
+                upgradeScript.upgrade = engineUpgrade;
+                upgradeScript.activeNodeScript = nodeScript;
+                upgradeScript.enabled = true;
+            }
+
+            Button buyButton = upgradeScript.buyButton;
+
+            if (buyButton == null)
+            {
+                Debug.LogError("Button setup error on " + gameObject.name);
+                this.enabled = false;
+                return;
+            }
+
+            // Setup the click logic
+            buyButton.onClick.AddListener(() => UpgradeBuyButtonClicked(upgradeScript));
+        }
     }
 
 
@@ -115,7 +147,10 @@ public class NodeUILogicSetup : MonoBehaviour
                 NodeConnections currentActiveNodeConnections = currentActiveNode.GetComponent<NodeConnections>();
                 if (currentActiveNodeConnections != null && currentActiveNodeConnections.connectedNodes.ContainsKey(myConnections))
                 {
-                    TimeCounter.Instance.passTime(currentActiveNodeConnections.connectedNodes[myConnections]);
+                    // Work out the time to pass based off the distance and the engine speed
+                    float currentEngineSpeed = Defs.Instance.engineUpgradesSpeeds[PlayerCargo.Instance.GetCurrentEngine()];
+                    int timeToPass = (int)(currentActiveNodeConnections.connectedNodes[myConnections] * currentEngineSpeed);
+                    TimeCounter.Instance.passTime(timeToPass);
                 } else
                 {
                     Debug.LogError("Error getting Current Active Node Connections on " + transform.parent.name);
@@ -130,6 +165,12 @@ public class NodeUILogicSetup : MonoBehaviour
             {
                 good.updateUI();
             }
+
+            // Update all Upgrades UI
+            foreach (var upgrade in ObjectManager.Instance.globalUpgradeList)
+            {
+                upgrade.updateUI();
+            }
         }
     }
 
@@ -141,5 +182,10 @@ public class NodeUILogicSetup : MonoBehaviour
     private void GoodsSellButtonClicked(Good goodScript)
     {
         goodScript.SellGood(1);
+    }
+
+    private void UpgradeBuyButtonClicked(Upgrade upgradeScript)
+    {
+        upgradeScript.BuyUpgrade();
     }
 }

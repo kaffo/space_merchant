@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Defs : Singleton<Defs>
 {
+    #region TradeGoods
     public enum TradeGoods
     {
         GOOD_FOOD = 0,
@@ -59,4 +60,30 @@ public class Defs : Singleton<Defs>
         { TradeGoods.GOOD_FUEL, 5},
         { TradeGoods.GOOD_FIREWORKS, 5}
     };
+    #endregion
+    #region Upgrades
+    public enum EngineUpgrades
+    {
+        ENGINEUPRADE_DEFAULT = 0,
+        ENGINEUPRADE_GREEN_ONE = 1,        
+    }
+
+    // Engine Upgrade Names
+    public Dictionary<EngineUpgrades, string> engineUpgradesNames = new Dictionary<EngineUpgrades, string>() {
+        { EngineUpgrades.ENGINEUPRADE_DEFAULT, "Engine - Default"},
+        { EngineUpgrades.ENGINEUPRADE_GREEN_ONE, "Engine - Green - 1"}
+    };
+
+    // Engine Upgrades Speeds
+    public Dictionary<EngineUpgrades, float> engineUpgradesSpeeds = new Dictionary<EngineUpgrades, float>() {
+        { EngineUpgrades.ENGINEUPRADE_DEFAULT, 1f},
+        {EngineUpgrades.ENGINEUPRADE_GREEN_ONE, 0.9f}
+    };
+
+    // Engine Upgrade Prices
+    public Dictionary<EngineUpgrades, float> engineUpgradesPrices = new Dictionary<EngineUpgrades, float>() {
+        { EngineUpgrades.ENGINEUPRADE_DEFAULT, 100f},
+        { EngineUpgrades.ENGINEUPRADE_GREEN_ONE, 400f}
+    };
+    #endregion
 }
