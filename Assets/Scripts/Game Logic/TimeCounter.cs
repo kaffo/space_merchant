@@ -31,6 +31,7 @@ public class TimeCounter : Singleton<TimeCounter>
             timeLeft = (int)Mathf.Max(timeLeft - timeToPass, 0f);
 
             Debug.Log("Time Left: " + timeLeft);
+            StepEconomy(timeToPass);
             UpdateUI();
         }
     }
@@ -48,5 +49,15 @@ public class TimeCounter : Singleton<TimeCounter>
     public int currentTimeLeft()
     {
         return timeLeft;
+    }
+
+    public void StepEconomy(int timesToStep = 1)
+    {
+        IEnumerator currentEconMethod;
+        foreach (var goodScript in ObjectManager.Instance.globalGoodList)
+        {
+            currentEconMethod = goodScript.StepEconomy(timesToStep);
+            StartCoroutine(currentEconMethod);
+        }
     }
 }

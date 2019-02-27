@@ -177,7 +177,8 @@ public class Good : MonoBehaviour
             playerMoney.incrementPlayerCash(-buyPrice);
             PlayerCargo.Instance.AddSingleCargo(good);
             Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + buyPrice * quantity);
-            setBuyPrice(buyPrice + 10);
+            setBuyPrice(buyPrice + (int)((float)buyPrice / 100f * 10f));
+            TimeCounter.Instance.StepEconomy(quantity);
             return true;
         } else
         {
@@ -194,12 +195,31 @@ public class Good : MonoBehaviour
             PlayerMoney.Instance.incrementPlayerCash(sellPrice);
             PlayerCargo.Instance.RemoveSingleCargo(good);
             Debug.Log("Sold " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + sellPrice * quantity);
-            //TODO subclass price change
-            setSellPrice(sellPrice - 10);
+            setSellPrice(sellPrice - (int)((float)sellPrice / 100f * 10f));
+            TimeCounter.Instance.StepEconomy(quantity);
             return true;
         } else
         {
             return false;
         }
+    }
+
+    public IEnumerator StepEconomy(int timesToStep = 1)
+    {
+        for (int i = 0; i < timesToStep; i++)
+        {
+            // A low chance that something happens to each value
+            if (Random.value > 0.95)
+            {
+                incrementBuyQuantity(1);
+                setBuyPrice(buyPrice - (int)((float)buyPrice / 100f * 10f));
+            }
+            if (Random.value > 0.95)
+            {
+                incrementSellQuantity(1);
+                setSellPrice(sellPrice + (int)((float)sellPrice / 100f * 10f));
+            }
+        }
+        yield return null;
     }
 }

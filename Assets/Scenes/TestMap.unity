@@ -762,7 +762,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Buy Medicine
 
-    $500'
+    $500
+
+    +25 days'
 --- !u!222 &789674399
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2107,6 +2109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   medicineButton: {fileID: 965959865}
+  medicineText: {fileID: 789674398}
 --- !u!114 &2066189209
 MonoBehaviour:
   m_ObjectHideFlags: 0
