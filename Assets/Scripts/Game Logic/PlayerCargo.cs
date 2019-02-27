@@ -24,16 +24,20 @@ public class PlayerCargo : Singleton<PlayerCargo>
             return;
         };
 
-        string newText = "#### Cargo ####";
+        string startText = "Cargo - ";
+        string newText = "";
+        int total = 0;
         for (int i = 0; i < Enum.GetNames(typeof(Defs.TradeGoods)).Length; i++)
         {
             if (cargo[i] > 0)
             {
+                total += cargo[i];
                 newText = newText + "\n" + Defs.Instance.goodNames[(Defs.TradeGoods)i] + " - " + cargo[i];
             }
         }
 
-        cargoText.text = newText;
+        startText = startText + total.ToString() + "/" + size;
+        cargoText.text = startText + newText;
     }
 
     public bool AddSingleCargo(Defs.TradeGoods good)
