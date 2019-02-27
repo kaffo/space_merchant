@@ -5,6 +5,7 @@ using UnityEngine;
 public class StartScript : MonoBehaviour
 {
     public ActiveNode startNode;
+    public ClickToContinuePopup letterStartScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,6 +13,11 @@ public class StartScript : MonoBehaviour
         {
             startNode.setActive(true);
             ObjectManager.Instance.currentActiveNode = startNode;
+        }
+
+        if (letterStartScript != null)
+        {
+            letterStartScript.SetupLetter(null);
         }
     }
 }
