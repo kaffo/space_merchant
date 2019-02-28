@@ -209,6 +209,7 @@ public class Good : MonoBehaviour
 
     public IEnumerator StepEconomy(int timesToStep = 1)
     {
+        timesToStep = timesToStep / 10;
         for (int i = 0; i < timesToStep; i++)
         {
             // A low chance that something happens to each value
