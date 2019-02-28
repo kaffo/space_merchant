@@ -188,7 +188,15 @@ public class Good : MonoBehaviour
             PlayerCargo.Instance.AddSingleCargo(good);
             Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + buyPrice * quantity);
             setBuyPrice(buyPrice + (int)((float)buyPrice / 100f * 10f));
-            TimeCounter.Instance.StepEconomy(quantity);
+
+            // Pass time for each unit bought
+            TimeCounter.Instance.passTime(quantity);
+
+            // Disable any outlines to avoid player confusion
+            foreach (var goodScript in ObjectManager.Instance.globalGoodList)
+            {
+                goodScript.SetSellButtonHilight(false);
+            }
             return true;
         } else
         {
@@ -206,7 +214,7 @@ public class Good : MonoBehaviour
             PlayerCargo.Instance.RemoveSingleCargo(good);
             Debug.Log("Sold " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + sellPrice * quantity);
             setSellPrice(sellPrice - (int)((float)sellPrice / 100f * 10f));
-            TimeCounter.Instance.StepEconomy(quantity);
+            TimeCounter.Instance.passTime(quantity);
             return true;
         } else
         {
