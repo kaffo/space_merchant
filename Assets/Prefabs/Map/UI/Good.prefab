@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 267686698404783941}
   - component: {fileID: 2706694764456355214}
   - component: {fileID: 1532659720629267847}
+  - component: {fileID: 3048887546908425282}
   m_Layer: 0
   m_Name: GoodButtonSell
   m_TagString: Untagged
@@ -118,6 +119,21 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &3048887546908425282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245595900345881307}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.80819553, g: 0.9811321, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2504332341210979743
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +348,8 @@ MonoBehaviour:
   buyButton: {fileID: 4979857880482503379}
   sellText: {fileID: 9205861317316638280}
   sellButton: {fileID: 1532659720629267847}
+  sellButtonOutline: {fileID: 3048887546908425282}
+  buyButtonUIHandler: {fileID: 7878426999311590677}
 --- !u!1 &7150947412818472261
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +362,7 @@ GameObject:
   - component: {fileID: 4339396901835915706}
   - component: {fileID: 6691230710823281909}
   - component: {fileID: 4979857880482503379}
+  - component: {fileID: 7878426999311590677}
   m_Layer: 0
   m_Name: GoodButtonBuy
   m_TagString: Untagged
@@ -450,6 +469,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &7878426999311590677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150947412818472261}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d07026d5519334a90cb2fbe6c7735e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myGoodScript: {fileID: 0}
 --- !u!1 &7275896438503640198
 GameObject:
   m_ObjectHideFlags: 0

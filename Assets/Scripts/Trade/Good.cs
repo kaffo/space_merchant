@@ -22,6 +22,7 @@ public class Good : MonoBehaviour
     private Button buyButton;
     private Text sellText;
     private Button sellButton;
+    private Outline sellButtonOutline;
 
     // Start is called before the first frame update
     void Start()
@@ -56,8 +57,14 @@ public class Good : MonoBehaviour
         buyButton = myUIReferences.buyButton;
         sellText = myUIReferences.sellText;
         sellButton = myUIReferences.sellButton;
+        sellButtonOutline = myUIReferences.sellButtonOutline;
 
-        if (goodText == null || buyText == null || buyButton  == null || sellText == null || sellButton == null)
+        // Setup and enable Buy Button UI handler
+        myUIReferences.buyButtonUIHandler.myGoodScript = this;
+        myUIReferences.buyButtonUIHandler.enabled = true;
+
+        if (goodText == null || buyText == null || buyButton  == null || sellText == null || sellButton == null
+            || sellButtonOutline == null)
         {
             Debug.LogError("Button Text can't be found on " + gameObject.name);
             this.enabled = false;
@@ -205,6 +212,23 @@ public class Good : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public IEnumerator CheckSellPriceCheaper(Defs.TradeGoods goodToCheck, int priceToCheck)
+    {
+        if (goodToCheck == good && sellQuantity > 1 && sellPrice > priceToCheck)
+        {
+            SetSellButtonHilight(true);
+        } else
+        {
+            SetSellButtonHilight(false);
+        }
+        yield return null;
+    }
+
+    public void SetSellButtonHilight(bool valueToSet)
+    {
+        sellButtonOutline.enabled = valueToSet;
     }
 
     public IEnumerator StepEconomy(int timesToStep = 1)

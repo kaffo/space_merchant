@@ -11,4 +11,8 @@ public class GoodUIReferences : MonoBehaviour
     public Button buyButton;
     public Text sellText;
     public Button sellButton;
+    public Outline sellButtonOutline;
+
+    [Header("UI Scripts")]
+    public BuyButtonUIHandler buyButtonUIHandler;
 }
