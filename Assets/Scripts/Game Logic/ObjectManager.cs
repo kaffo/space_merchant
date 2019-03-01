@@ -5,7 +5,6 @@ using UnityEngine;
 public class ObjectManager : Singleton<ObjectManager>
 {
     public ActiveNode currentActiveNode;
-    public GameObject jumpTimePanel;
     public List<Good> globalGoodList = new List<Good>();
     public List<Upgrade> globalUpgradeList = new List<Upgrade>();
 }

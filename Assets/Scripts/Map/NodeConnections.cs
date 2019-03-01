@@ -37,6 +37,7 @@ public class NodeConnections : MonoBehaviour
             Connection currentConnectionScript = currentConnection.GetComponent<Connection>();
 
             currentConnectionScript.nodeToConnect = nodesToConnect[i];
+            currentConnectionScript.cost = timeToTravel[i];
             currentConnectionScript.enabled = true;
         }
     }

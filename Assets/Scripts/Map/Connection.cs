@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Connection : MonoBehaviour
 {
@@ -11,17 +12,20 @@ public class Connection : MonoBehaviour
 
     [Header("Internal References")]
     public Transform connectionModel;
+    public Text distanceText;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (nodeToConnect == null || connectionModel == null)
+        if (nodeToConnect == null || connectionModel == null || distanceText == null)
         {
             Debug.LogError(this.name + " setup error!");
             this.enabled = false;
             return;
         }
+
+        distanceText.text = cost.ToString();
 
         Vector3 myStartPos = transform.position;
         Vector3 otherNodePos = nodeToConnect.transform.position;
@@ -43,11 +47,5 @@ public class Connection : MonoBehaviour
         transform.rotation = quaternionToOtherNode;
 
         connectionModel.localScale = new Vector3(connectionModel.localScale.x, connectionLength, connectionModel.localScale.x);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
