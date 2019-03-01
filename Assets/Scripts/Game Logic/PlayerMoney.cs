@@ -12,6 +12,7 @@ public class PlayerMoney : Singleton<PlayerMoney>
     void Start()
     {
         playerCash = startingCash;
+        UpdateUI();
     }
 
     private void UpdateUI()

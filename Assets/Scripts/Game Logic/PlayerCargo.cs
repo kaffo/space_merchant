@@ -17,6 +17,7 @@ public class PlayerCargo : Singleton<PlayerCargo>
     {
         //Cargo defines how many of each good we have in our inventory
         cargo = new int[Enum.GetNames(typeof(Defs.TradeGoods)).Length];
+        UpdateUI();
     }
 
     private void UpdateUI()

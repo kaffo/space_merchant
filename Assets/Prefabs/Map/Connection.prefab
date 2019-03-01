@@ -475,3 +475,11 @@ MonoBehaviour:
   nodeToConnect: {fileID: 0}
   connectionModel: {fileID: 8112075742315399402}
   distanceText: {fileID: 7662023885597979021}
+  defaultConnectionMaterial: {fileID: 2100000, guid: 20e568d7c8dd6214ea5e1ee0e367d67d,
+    type: 2}
+  greenConnectionMaterial: {fileID: 2100000, guid: f502b3c742231d34693aa7a221276863,
+    type: 2}
+  redConnectionMaterial: {fileID: 2100000, guid: 4781218833e964b4dafaf37c204eeb9b,
+    type: 2}
+  blueConnectionMaterial: {fileID: 2100000, guid: cd37f32cf30ee0c4e8359d38b802476a,
+    type: 2}

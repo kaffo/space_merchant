@@ -16,8 +16,8 @@ public class ActiveNode : MonoBehaviour
     public UnityEngine.UI.Button jumpButton;
     public GameObject goodsParent;
 
-    [Header("Game Manager")]
-    public GameManagerFinder managerFinder;
+    [Header("Script References")]
+    public NodeConnections nodeConnectionsScript;
 
     private bool isActiveNode = false;
 
@@ -53,6 +53,22 @@ public class ActiveNode : MonoBehaviour
 
     public void setRingActive(bool active)
     {
+        Defs.ConnectionTypes connectionType = ObjectManager.Instance.currentActiveNode.nodeConnectionsScript.GetConnectionType(this.nodeConnectionsScript);
+
+        // Check a connection exists
+        if (connectionType < 0)
+        {
+            Debug.LogError("Trying to activate node with no connection on " + gameObject.name);
+            return;
+        } 
+
+        // If it's a green connection, check the player has a green engine
+        if (connectionType == Defs.ConnectionTypes.CONNECTIONTYPE_GREEN && PlayerCargo.Instance.GetCurrentEngine() != Defs.EngineUpgrades.ENGINEUPRADE_GREEN_ONE)
+        {
+            Debug.Log("Can't jump to " + gameObject.name + " without Green engine");
+            return;
+        }
+
         isRingActive = active;
         jumpButton.interactable = active;
         if (active)
@@ -72,7 +88,7 @@ public class ActiveNode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ship == null || ring == null || managerFinder == null || ringHilightMaterial == null || ringAdjacentMaterial == null || jumpButton == null
+        if (ship == null || ring == null || nodeConnectionsScript == null || ringHilightMaterial == null || ringAdjacentMaterial == null || jumpButton == null
             || goodsParent == null)
         {
             Debug.LogError("Active Node Script error on " + gameObject.name);

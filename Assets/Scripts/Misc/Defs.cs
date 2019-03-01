@@ -8,6 +8,7 @@ public class Defs : Singleton<Defs>
     #region Connections
     public enum ConnectionTypes
     {
+        CONNECTIONTYPE_NOCONNECTION = -1,
         CONNECTIONTYPE_DEFAULT = 0,
         CONNECTIONTYPE_GREEN = 1,
         CONNECTIONTYPE_RED = 2,

@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect: []
   timeToTravel: 
+  nodeConnectionTypes: 
   connectionParent: {fileID: 5613863911473610894}
   connectionPrefab: {fileID: 6859955233388997608, guid: 9db7d81e5e0987841a46d3e2f00edacc,
     type: 3}
@@ -89,7 +90,7 @@ MonoBehaviour:
     type: 2}
   jumpButton: {fileID: 0}
   goodsParent: {fileID: 0}
-  managerFinder: {fileID: 7784900728682778251}
+  nodeConnectionsScript: {fileID: 5240076250167396683}
 --- !u!114 &7784900728682778251
 MonoBehaviour:
   m_ObjectHideFlags: 0

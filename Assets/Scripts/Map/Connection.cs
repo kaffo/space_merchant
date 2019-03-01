@@ -14,11 +14,18 @@ public class Connection : MonoBehaviour
     public Transform connectionModel;
     public Text distanceText;
 
+    [Header("Materials")]
+    public Material defaultConnectionMaterial;
+    public Material greenConnectionMaterial;
+    public Material redConnectionMaterial;
+    public Material blueConnectionMaterial;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        if (nodeToConnect == null || connectionModel == null || distanceText == null)
+        if (nodeToConnect == null || connectionModel == null || distanceText == null
+            || defaultConnectionMaterial == null || greenConnectionMaterial == null || redConnectionMaterial == null || blueConnectionMaterial == null)
         {
             Debug.LogError(this.name + " setup error!");
             this.enabled = false;
@@ -47,5 +54,18 @@ public class Connection : MonoBehaviour
         transform.rotation = quaternionToOtherNode;
 
         connectionModel.localScale = new Vector3(connectionModel.localScale.x, connectionLength, connectionModel.localScale.x);
+
+        switch (connectionType)
+        {
+            case Defs.ConnectionTypes.CONNECTIONTYPE_GREEN:
+                connectionModel.GetComponent<Renderer>().material = greenConnectionMaterial;
+                break;
+            case Defs.ConnectionTypes.CONNECTIONTYPE_RED:
+                connectionModel.GetComponent<Renderer>().material = redConnectionMaterial;
+                break;
+            case Defs.ConnectionTypes.CONNECTIONTYPE_BLUE:
+                connectionModel.GetComponent<Renderer>().material = blueConnectionMaterial;
+                break;
+        }
     }
 }

@@ -8,7 +8,7 @@ public class UILogicSetup : MonoBehaviour
     public Button medicineButton;
     public Text medicineText;
 
-    private int daysPerMedicine = 25;
+    private int timePerMedicine = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +33,11 @@ public class UILogicSetup : MonoBehaviour
         } else
         {
             Debug.Log("Medicine Purchase Successful");
-            TimeCounter.Instance.addTime(daysPerMedicine);
+            TimeCounter.Instance.addTime(timePerMedicine);
             playerMoney.incrementPlayerCash(-500);
 
-            daysPerMedicine -= 1;
-            medicineText.text = "Buy Medicine\n$500\n+" + daysPerMedicine + " days";
+            timePerMedicine -= 1;
+            medicineText.text = "Buy Medicine\n$500\n+" + timePerMedicine + " days";
         }
     }
 }

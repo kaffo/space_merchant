@@ -20,6 +20,7 @@ public class TimeCounter : Singleton<TimeCounter>
             this.enabled = false;
             return;
         }
+        UpdateUI();
     }
 
     private void UpdateUI()
