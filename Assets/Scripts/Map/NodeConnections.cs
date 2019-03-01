@@ -7,10 +7,21 @@ public class NodeConnections : MonoBehaviour
     public List<NodeConnections> nodesToConnect;
     public List<int> timeToTravel;
 
+    public GameObject connectionParent;
+
+    public GameObject connectionPrefab;
+
     public Dictionary<NodeConnections, int> connectedNodes;
     // Start is called before the first frame update
     void Start()
     {
+        if (connectionParent == null || connectionPrefab == null)
+        {
+            Debug.LogError(this.name + " setup error!");
+            this.enabled = false;
+            return;
+        }
+
         connectedNodes = new Dictionary<NodeConnections, int>();
         if ( nodesToConnect.Count != timeToTravel.Count)
         {
@@ -22,12 +33,11 @@ public class NodeConnections : MonoBehaviour
         for (int i = 0; i < nodesToConnect.Count; i++)
         {
             connectedNodes.Add(nodesToConnect[i], timeToTravel[i]);
-        }
-    }
+            GameObject currentConnection = Instantiate(connectionPrefab, connectionParent.transform);
+            Connection currentConnectionScript = currentConnection.GetComponent<Connection>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            currentConnectionScript.nodeToConnect = nodesToConnect[i];
+            currentConnectionScript.enabled = true;
+        }
     }
 }

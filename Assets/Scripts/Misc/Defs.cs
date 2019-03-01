@@ -5,6 +5,15 @@ using UnityEngine;
 
 public class Defs : Singleton<Defs>
 {
+    #region Connections
+    public enum ConnectionTypes
+    {
+        CONNECTIONTYPE_DEFAULT = 0,
+        CONNECTIONTYPE_GREEN = 1,
+        CONNECTIONTYPE_RED = 2,
+        CONNECTIONTYPE_BLUE = 3
+    }
+    #endregion
     #region TradeGoods
     public enum TradeGoods
     {
@@ -78,7 +87,7 @@ public class Defs : Singleton<Defs>
     public enum EngineUpgrades
     {
         ENGINEUPRADE_DEFAULT = 0,
-        ENGINEUPRADE_GREEN_ONE = 1,        
+        ENGINEUPRADE_GREEN_ONE = 1    
     }
 
     // Engine Upgrade Names
