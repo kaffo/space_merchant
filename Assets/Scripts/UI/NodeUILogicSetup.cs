@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class NodeUILogicSetup : MonoBehaviour
 {
     [Header("Game Elements")]
-    public GameObject mapParentObject;
+    public GameObject panelCanvasParentObject;
+    public GameObject nodeNameCanvasObject;
 
     [Header("UI Elements")]
     public Button jumpButton;
@@ -24,6 +25,7 @@ public class NodeUILogicSetup : MonoBehaviour
     public GameObject goodsUIParent;
     public GameObject upgradeUIParent;
     public GameObject panelPrefab;
+    public GameObject nodeNamePrefab;
 
     private NodePanelReferences myPanelReferenceScript;
 
@@ -31,15 +33,20 @@ public class NodeUILogicSetup : MonoBehaviour
     void Start()
     {
         if (nodeParametersScript == null || nodeScript == null || myConnections == null || goodsUIParent == null || panelPrefab == null
-            || upgradeUIParent == null || mapParentObject == null || nodeClickScript == null)
+            || upgradeUIParent == null || panelCanvasParentObject == null || nodeNameCanvasObject  == null || nodeClickScript == null || nodeNamePrefab == null)
         {
             Debug.LogError(gameObject.name + " UI setup script is invalid");
             this.enabled = false;
             return;
         }
 
-        GameObject myPanelObject = Instantiate(panelPrefab, mapParentObject.transform);
+        GameObject myPanelObject = Instantiate(panelPrefab, panelCanvasParentObject.transform);
         myPanelObject.transform.position = transform.position;
+
+        GameObject myNodeNameObject = Instantiate(nodeNamePrefab, nodeNameCanvasObject.transform);
+        myNodeNameObject.transform.position = new Vector3(transform.position.x, transform.position.y - 0.7f, transform.position.z);
+        NodeNameReferences nodeNameReferencesScript = myNodeNameObject.GetComponent<NodeNameReferences>();
+        if (nodeNameReferencesScript != null) { nodeNameReferencesScript.nodeNameText.text = gameObject.name; }
 
         myPanelReferenceScript = myPanelObject.GetComponent<NodePanelReferences>();
         if(myPanelReferenceScript == null)

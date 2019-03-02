@@ -53,6 +53,9 @@ public class Connection : MonoBehaviour
         transform.position = middlePos + myPerpVector;
         transform.rotation = quaternionToOtherNode;
 
+        // Flip the distance text back so it's always horizontal
+        distanceText.transform.parent.localRotation = Quaternion.Euler(new Vector3(0f, 0f, -angleToOtherNode + 90));
+
         connectionModel.localScale = new Vector3(connectionModel.localScale.x, connectionLength, connectionModel.localScale.x);
 
         switch (connectionType)
