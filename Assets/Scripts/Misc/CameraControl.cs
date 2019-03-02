@@ -13,6 +13,10 @@ public class CameraControl : MonoBehaviour
     shift : Makes camera accelerate
     space : Moves camera on X and Z axis only.  So camera doesn't gain any height*/
 
+    public float minXPos = -25f;
+    public float maxXPos = 25f;
+    public float minYPos = -25f;
+    public float maxYPos = 25f;
 
     float mainSpeed = 10.0f; //regular speed
     float zoomSpeed = 0.5f;
@@ -52,19 +56,8 @@ public class CameraControl : MonoBehaviour
         }
 
         p = p * Time.deltaTime;
-        Vector3 newPosition = transform.position;
-        if (Input.GetKey(KeyCode.Space))
-        { //If player wants to move on X and Z axis only
-            transform.Translate(p);
-            newPosition.x = transform.position.x;
-            newPosition.z = transform.position.z;
-            transform.position = newPosition;
-        }
-        else
-        {
-            transform.Translate(p);
-        }
-
+        transform.Translate(p);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minXPos, maxXPos), Mathf.Clamp(transform.position.y, minYPos, maxYPos), transform.position.z);
     }
 
     private Vector3 GetBaseInput()
