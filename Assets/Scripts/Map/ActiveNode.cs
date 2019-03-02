@@ -7,6 +7,7 @@ public class ActiveNode : MonoBehaviour
     [Header("Game Objects")]
     public GameObject ship;
     public GameObject ring;
+    public GameObject connections;
 
     [Header("Materials for Ring")]
     public Material ringHilightMaterial;
@@ -88,8 +89,8 @@ public class ActiveNode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (ship == null || ring == null || nodeConnectionsScript == null || ringHilightMaterial == null || ringAdjacentMaterial == null || jumpButton == null
-            || goodsParent == null)
+        if (ship == null || ring == null || connections == null || nodeConnectionsScript == null || ringHilightMaterial == null || ringAdjacentMaterial == null
+            || jumpButton == null || goodsParent == null)
         {
             Debug.LogError("Active Node Script error on " + gameObject.name);
             this.enabled = false;
@@ -97,5 +98,6 @@ public class ActiveNode : MonoBehaviour
         }
 
         ship.SetActive(isActiveNode);
+        ObjectManager.Instance.globalNodeList.Add(this);
     }
 }

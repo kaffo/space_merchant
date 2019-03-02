@@ -20,6 +20,7 @@ public class Connection : MonoBehaviour
     public Material redConnectionMaterial;
     public Material blueConnectionMaterial;
 
+    private int currentCost = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -70,5 +71,18 @@ public class Connection : MonoBehaviour
                 connectionModel.GetComponent<Renderer>().material = blueConnectionMaterial;
                 break;
         }
+    }
+
+    public IEnumerator EngineUpgrade(Defs.EngineUpgrades engineUpgrade)
+    {
+        float modifer = Defs.Instance.engineUpgradesSpeeds[engineUpgrade];
+        currentCost = (int)((float)cost * modifer);
+        distanceText.text = currentCost.ToString();
+        yield return null;
+    }
+
+    public int GetCurrentJumpCost()
+    {
+        return currentCost;
     }
 }

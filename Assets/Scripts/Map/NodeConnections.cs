@@ -13,7 +13,7 @@ public class NodeConnections : MonoBehaviour
     public GameObject connectionParent;
     public GameObject connectionPrefab;
 
-    public Dictionary<NodeConnections, int> connectedNodes;
+    public Dictionary<NodeConnections, Connection> connectedNodes;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +24,8 @@ public class NodeConnections : MonoBehaviour
             return;
         }
 
-        connectedNodes = new Dictionary<NodeConnections, int>();
-        if ( nodesToConnect.Count != timeToTravel.Count && nodesToConnect.Count != nodeConnectionTypes.Count)
+        connectedNodes = new Dictionary<NodeConnections, Connection>();
+        if ( nodesToConnect.Count != timeToTravel.Count || nodesToConnect.Count != nodeConnectionTypes.Count)
         {
             Debug.LogError(gameObject.name + " has incorrectly setup data!");
             this.enabled = false;
@@ -34,7 +34,6 @@ public class NodeConnections : MonoBehaviour
 
         for (int i = 0; i < nodesToConnect.Count; i++)
         {
-            connectedNodes.Add(nodesToConnect[i], timeToTravel[i]);
             GameObject currentConnection = Instantiate(connectionPrefab, connectionParent.transform);
             Connection currentConnectionScript = currentConnection.GetComponent<Connection>();
 
@@ -42,6 +41,7 @@ public class NodeConnections : MonoBehaviour
             currentConnectionScript.cost = timeToTravel[i];
             currentConnectionScript.connectionType = nodeConnectionTypes[i];
             currentConnectionScript.enabled = true;
+            connectedNodes.Add(nodesToConnect[i], currentConnectionScript);
         }
     }
 

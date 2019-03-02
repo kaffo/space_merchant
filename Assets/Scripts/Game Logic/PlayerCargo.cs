@@ -118,5 +118,15 @@ public class PlayerCargo : Singleton<PlayerCargo>
     public void UpgradeCurrentEngine(Defs.EngineUpgrades engineUpgrade)
     {
         currentEngine = engineUpgrade;
+        foreach (ActiveNode currentNode in ObjectManager.Instance.globalNodeList)
+        {
+            GameObject currentNodeConnectionsGO = currentNode.connections;
+            Connection[] currentNodeConnectionsList = currentNodeConnectionsGO.GetComponentsInChildren<Connection>();
+            foreach (Connection currentNodeConnectionScript in currentNodeConnectionsList)
+            {
+                IEnumerator enumerable = currentNodeConnectionScript.EngineUpgrade(engineUpgrade);
+                StartCoroutine(enumerable);
+            }
+        }
     }
 }

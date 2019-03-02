@@ -562,7 +562,7 @@ PrefabInstance:
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[0]
-      value: 70
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 809756613495460765, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
@@ -604,6 +604,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5751a8b33e0acb4bb7338930e4330d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &434072462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5613863911473610894, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6770783619514157449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &500287818
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,7 +901,7 @@ PrefabInstance:
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[0]
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
@@ -1506,7 +1512,7 @@ PrefabInstance:
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[0]
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 809756613495460765, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
@@ -1729,12 +1735,12 @@ PrefabInstance:
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[0]
-      value: 110
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[1]
-      value: 70
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 809756613495460765, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
@@ -2126,22 +2132,22 @@ PrefabInstance:
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[0]
-      value: 130
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[1]
-      value: 70
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[2]
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[3]
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
@@ -2344,7 +2350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40bcefa016e8e74ca0ef10e7b06326c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingCash: 989
+  startingCash: 98900
   moneyText: {fileID: 1141929942}
 --- !u!114 &2066189207
 MonoBehaviour:
@@ -2387,6 +2393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentActiveNode: {fileID: 0}
+  globalNodeList: []
   globalGoodList: []
   globalUpgradeList: []
 --- !u!114 &186289146422354946 stripped
@@ -2534,7 +2541,7 @@ PrefabInstance:
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[0]
-      value: 70
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
@@ -2544,12 +2551,12 @@ PrefabInstance:
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[1]
-      value: 130
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5240076250167396683, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: timeToTravel.Array.data[2]
-      value: 110
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 809756613495460765, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
@@ -2571,6 +2578,11 @@ PrefabInstance:
       propertyPath: nodeConnectionsScript
       value: 
       objectReference: {fileID: 186289146422354946}
+    - target: {fileID: 4332502710867795493, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
+        type: 3}
+      propertyPath: connections
+      value: 
+      objectReference: {fileID: 434072462}
     - target: {fileID: 6779482466640408244, guid: 7eea30f46b8092f46ac0d1a58be4f0f1,
         type: 3}
       propertyPath: m_IsActive

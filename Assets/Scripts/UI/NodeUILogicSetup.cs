@@ -172,8 +172,7 @@ public class NodeUILogicSetup : MonoBehaviour
                 if (currentActiveNodeConnections != null && currentActiveNodeConnections.connectedNodes.ContainsKey(myConnections))
                 {
                     // Work out the time to pass based off the distance and the engine speed
-                    float currentEngineSpeed = Defs.Instance.engineUpgradesSpeeds[PlayerCargo.Instance.GetCurrentEngine()];
-                    int timeToPass = (int)(currentActiveNodeConnections.connectedNodes[myConnections] * currentEngineSpeed);
+                    int timeToPass = currentActiveNodeConnections.connectedNodes[myConnections].GetCurrentJumpCost();
                     TimeCounter.Instance.passTime(timeToPass);
                 } else
                 {

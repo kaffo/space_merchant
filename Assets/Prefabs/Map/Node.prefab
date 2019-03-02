@@ -85,6 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 6779482466640408244}
   ring: {fileID: 6748649493210424991}
+  connections: {fileID: 5613863911473610894}
   ringHilightMaterial: {fileID: 2100000, guid: c2671e89d1d250942b7f2f66a8491c46, type: 2}
   ringAdjacentMaterial: {fileID: 2100000, guid: 3e7189c4ddc950344a29451d413edf44,
     type: 2}
