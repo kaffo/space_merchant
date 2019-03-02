@@ -38,7 +38,7 @@ public class NodeConnections : MonoBehaviour
             Connection currentConnectionScript = currentConnection.GetComponent<Connection>();
 
             currentConnectionScript.nodeToConnect = nodesToConnect[i];
-            currentConnectionScript.cost = timeToTravel[i];
+            currentConnectionScript.SetJumpCost(timeToTravel[i]);
             currentConnectionScript.connectionType = nodeConnectionTypes[i];
             currentConnectionScript.enabled = true;
             connectedNodes.Add(nodesToConnect[i], currentConnectionScript);

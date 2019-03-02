@@ -26,7 +26,7 @@ public class UILogicSetup : MonoBehaviour
     private void BuyMedicineButtonClicked()
     {
         PlayerMoney playerMoney = PlayerMoney.Instance;
-        if (!playerMoney.checkCash(playerMoney.getPlayerCash() - 500))
+        if (!playerMoney.CheckCash(playerMoney.getPlayerCash() - 500))
         {
             Debug.Log("Medicine Purchase Failed");
             return;
@@ -34,7 +34,7 @@ public class UILogicSetup : MonoBehaviour
         {
             Debug.Log("Medicine Purchase Successful");
             TimeCounter.Instance.addTime(timePerMedicine);
-            playerMoney.incrementPlayerCash(-500);
+            playerMoney.IncrementPlayerCash(-500);
 
             timePerMedicine -= 1;
             medicineText.text = "Buy Medicine\n$500\n+" + timePerMedicine + " days";

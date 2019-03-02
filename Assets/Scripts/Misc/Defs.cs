@@ -58,14 +58,14 @@ public class Defs : Singleton<Defs>
 
     // Good Max Prices
     public Dictionary<TradeGoods, float> goodMaxPrice = new Dictionary<TradeGoods, float>() {
-        { TradeGoods.GOOD_FOOD, 30f},
+        { TradeGoods.GOOD_FOOD, 40f},
         { TradeGoods.GOOD_FUEL, 180f},
         { TradeGoods.GOOD_FIREWORKS, 525f}
     };
 
     // Good Prices Flex
     public Dictionary<TradeGoods, float> goodPriceDifference = new Dictionary<TradeGoods, float>() {
-        { TradeGoods.GOOD_FOOD, 8f},
+        { TradeGoods.GOOD_FOOD, 12f},
         { TradeGoods.GOOD_FUEL, 30f},
         { TradeGoods.GOOD_FIREWORKS, 75f}
     };

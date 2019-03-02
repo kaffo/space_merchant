@@ -25,15 +25,40 @@ public class TimeCounter : Singleton<TimeCounter>
 
     private void UpdateUI()
     {
-        if (timeLeft <= 0)
+        if (gameOver)
         {
             Debug.Log("Your Father Has Died...");
             textToUpdate.text = "Your Father has died...";
             popupScript.SetupLetter("My Father has died...\n\nFor " + timePassed + " long hours I struggled, however it is apparent I could not do enough...\n\nMaybe I could have done more, or maybe this outcome was always inevitable. But it is too late for these thoughts now.\n\nInstead I must turn my attention to my children and build a future for them.\n\nGod forbid I ever fall ill like my Father and my children must bear the burden as I have....");
-            gameOver = true;
         } else
         {
             textToUpdate.text = "Time Left: " + timeLeft;
+        }
+    }
+
+    private void SetGameOver(bool isGameOver)
+    {
+        if (isGameOver)
+        {
+            gameOver = isGameOver;
+
+            // Update all Goods UI
+            foreach (var good in ObjectManager.Instance.globalGoodList)
+            {
+                good.updateUI();
+            }
+
+            // Update all Upgrades UI
+            foreach (var upgrade in ObjectManager.Instance.globalUpgradeList)
+            {
+                upgrade.updateUI();
+            }
+
+            // Update all Jump Button UI
+            foreach (var node in ObjectManager.Instance.globalNodeList)
+            {
+                node.jumpButton.interactable = false;
+            }
         }
     }
 
@@ -47,6 +72,8 @@ public class TimeCounter : Singleton<TimeCounter>
             // Track time passed but don't track past 0
             timePassed += timeLeft - newTimeLeft;
             timeLeft = newTimeLeft;
+
+            if (timeLeft <= 0) { SetGameOver(true); }
 
             Debug.Log("Time Left: " + timeLeft);
             StepEconomy(timeToPass);

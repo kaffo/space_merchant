@@ -25,9 +25,9 @@ public class PlayerMoney : Singleton<PlayerMoney>
         return playerCash;
     }
 
-    public bool setPlayerCash(int newCash)
+    public bool SetPlayerCash(int newCash)
     {
-        if (checkCash(newCash))
+        if (CheckCash(newCash))
         {
             playerCash = newCash;
             UpdateUI();
@@ -39,9 +39,9 @@ public class PlayerMoney : Singleton<PlayerMoney>
         }
     }
 
-    public bool incrementPlayerCash(int incrementCash)
+    public bool IncrementPlayerCash(int incrementCash)
     {
-        if (checkCash(playerCash + incrementCash))
+        if (CheckCash(playerCash + incrementCash))
         {
             playerCash += incrementCash;
             UpdateUI();
@@ -52,7 +52,7 @@ public class PlayerMoney : Singleton<PlayerMoney>
         }
     }
 
-    public bool checkCash(int newCash)
+    public bool CheckCash(int newCash)
     {
         if (newCash < 0)
         {

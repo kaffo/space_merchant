@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Connection : MonoBehaviour
 {
     [Header("Connection Setup")]
-    public int cost = 10;
     public Defs.ConnectionTypes connectionType = Defs.ConnectionTypes.CONNECTIONTYPE_DEFAULT;
     public NodeConnections nodeToConnect;
 
@@ -20,6 +19,7 @@ public class Connection : MonoBehaviour
     public Material redConnectionMaterial;
     public Material blueConnectionMaterial;
 
+    private int initialCost = 10;
     private int currentCost = 10;
 
     // Start is called before the first frame update
@@ -33,7 +33,7 @@ public class Connection : MonoBehaviour
             return;
         }
 
-        distanceText.text = cost.ToString();
+        distanceText.text = initialCost.ToString();
 
         Vector3 myStartPos = transform.position;
         Vector3 otherNodePos = nodeToConnect.transform.position;
@@ -76,9 +76,15 @@ public class Connection : MonoBehaviour
     public IEnumerator EngineUpgrade(Defs.EngineUpgrades engineUpgrade)
     {
         float modifer = Defs.Instance.engineUpgradesSpeeds[engineUpgrade];
-        currentCost = (int)((float)cost * modifer);
+        currentCost = (int)((float)initialCost * modifer);
         distanceText.text = currentCost.ToString();
         yield return null;
+    }
+
+    public void SetJumpCost(int costToSet)
+    {
+        initialCost = costToSet;
+        currentCost = initialCost;
     }
 
     public int GetCurrentJumpCost()

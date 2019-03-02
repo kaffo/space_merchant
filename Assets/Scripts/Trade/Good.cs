@@ -76,28 +76,34 @@ public class Good : MonoBehaviour
 
     public void updateUI()
     {
-        // Set good text
         goodText.text = Defs.Instance.goodNames[good];
-
-        // Set buy text and button state
         buyText.text = buyQuantity + " - B - $" + buyPrice;
-        if (buyQuantity > 0 && activeNodeScript.getActive() && !TimeCounter.Instance.gameOver)
-        {
-            buyButton.interactable = true;
-        } else
-        {
-            buyButton.interactable = false;
-        }
-
-        // Set sell text and button state
         sellText.text = sellQuantity + " - S - $" + sellPrice;
-        if (sellQuantity > 0 && activeNodeScript.getActive() && !TimeCounter.Instance.gameOver)
+
+        //Only activate trade UI on active node
+        if (activeNodeScript.getActive())
         {
-            sellButton.interactable = true;
-        }
-        else
-        {
-            sellButton.interactable = false;
+            int playerCash = PlayerMoney.Instance.getPlayerCash();
+
+            // Set buy button state
+            if (buyQuantity > 0 && !PlayerCargo.Instance.CargoFull() && playerCash >= buyPrice && !TimeCounter.Instance.gameOver)
+            {
+                buyButton.interactable = true;
+            }
+            else
+            {
+                buyButton.interactable = false;
+            }
+
+            // Set sell button state
+            if (sellQuantity > 0 && PlayerCargo.Instance.HasGood(good) && !TimeCounter.Instance.gameOver)
+            {
+                sellButton.interactable = true;
+            }
+            else
+            {
+                sellButton.interactable = false;
+            }
         }
     }
 
@@ -176,15 +182,15 @@ public class Good : MonoBehaviour
     public bool BuyGood(int quantity)
     {
         PlayerMoney playerMoney = PlayerMoney.Instance;
-        if (!playerMoney.checkCash(playerMoney.getPlayerCash() - quantity * buyPrice))
+        if (!playerMoney.CheckCash(playerMoney.getPlayerCash() - quantity * buyPrice))
         {
             Debug.Log("Purchase Failed");
             return false;
         }
         
-        if (incrementBuyQuantity(-quantity))
+        if (!PlayerCargo.Instance.CargoFull() && incrementBuyQuantity(-quantity))
         {
-            playerMoney.incrementPlayerCash(-buyPrice);
+            playerMoney.IncrementPlayerCash(-buyPrice);
             PlayerCargo.Instance.AddSingleCargo(good);
             Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + buyPrice * quantity);
             setBuyPrice(buyPrice + (int)((float)buyPrice / 100f * 10f));
@@ -210,7 +216,7 @@ public class Good : MonoBehaviour
         // Check player cargo first
         if (PlayerCargo.Instance.HasGood(good) && incrementSellQuantity(-quantity))
         {
-            PlayerMoney.Instance.incrementPlayerCash(sellPrice);
+            PlayerMoney.Instance.IncrementPlayerCash(sellPrice);
             PlayerCargo.Instance.RemoveSingleCargo(good);
             Debug.Log("Sold " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + sellPrice * quantity);
             setSellPrice(sellPrice - (int)((float)sellPrice / 100f * 10f));
@@ -241,21 +247,21 @@ public class Good : MonoBehaviour
 
     public IEnumerator StepEconomy(int timesToStep = 1)
     {
-        timesToStep = timesToStep / 10;
         for (int i = 0; i < timesToStep; i++)
         {
             // A low chance that something happens to each value
-            if (Random.value > 0.95)
+            if (Random.value > 0.99)
             {
                 incrementBuyQuantity(1);
                 setBuyPrice(buyPrice - (int)((float)buyPrice / 100f * 10f));
             }
-            if (Random.value > 0.95)
+            if (Random.value > 0.99)
             {
                 incrementSellQuantity(1);
                 setSellPrice(sellPrice + (int)((float)sellPrice / 100f * 10f));
             }
         }
+        updateUI();
         yield return null;
     }
 }
