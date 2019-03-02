@@ -32,6 +32,14 @@ public class NodeUILogicSetup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < transform.parent.childCount; i++)
+        {
+            if (panelCanvasParentObject != null && nodeNameCanvasObject != null) { break; }
+            GameObject currentChild = transform.parent.GetChild(i).gameObject;
+            if (currentChild.CompareTag("PanelCanvas")) { panelCanvasParentObject = currentChild; }
+            if (currentChild.CompareTag("NodeNameCanvas")) { nodeNameCanvasObject = currentChild; }
+        }
+
         if (nodeParametersScript == null || nodeScript == null || myConnections == null || goodsUIParent == null || panelPrefab == null
             || upgradeUIParent == null || panelCanvasParentObject == null || nodeNameCanvasObject  == null || nodeClickScript == null || nodeNamePrefab == null)
         {

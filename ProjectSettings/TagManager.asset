@@ -6,6 +6,8 @@ TagManager:
   tags:
   - GameManager
   - JumpTimePanel
+  - PanelCanvas
+  - NodeNameCanvas
   layers:
   - Default
   - TransparentFX
