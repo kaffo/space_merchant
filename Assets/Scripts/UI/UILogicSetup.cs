@@ -36,8 +36,8 @@ public class UILogicSetup : MonoBehaviour
             TimeCounter.Instance.addTime(timePerMedicine);
             playerMoney.IncrementPlayerCash(-500);
 
-            timePerMedicine -= 1;
-            medicineText.text = "Buy Medicine\n$500\n+" + timePerMedicine + " days";
+            timePerMedicine = (int)((float)timePerMedicine - (float)timePerMedicine / 100 * 5);
+            medicineText.text = "Buy Medicine\n$500\n+" + timePerMedicine + " hours";
         }
     }
 }
