@@ -33,7 +33,7 @@ public class CameraControl : MonoBehaviour
 
         float mouseZoom = Input.mouseScrollDelta.y;
         float oldZoom = gameObject.GetComponent<Camera>().orthographicSize;
-        gameObject.GetComponent<Camera>().orthographicSize = Mathf.Clamp(oldZoom + -(mouseZoom * zoomSpeed), 0.5f, 50f);
+        gameObject.GetComponent<Camera>().orthographicSize = Mathf.Clamp(oldZoom + -(mouseZoom * zoomSpeed), 0.5f, 20f);
 
         //Keyboard commands
         Vector3 p = GetBaseInput();
