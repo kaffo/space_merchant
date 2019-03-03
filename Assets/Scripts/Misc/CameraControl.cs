@@ -18,22 +18,31 @@ public class CameraControl : MonoBehaviour
     public float minYPos = -25f;
     public float maxYPos = 25f;
 
+    public bool allowStartMouseDrag = true;
+
     float mainSpeed = 10.0f; //regular speed
     float zoomSpeed = 0.5f;
     float shiftAdd = 10.0f; //multiplied by how long shift is held.  Basically running
     float maxShift = 20.0f; //Maximum speed when holdin gshift
-    float camSens = 0.25f; //How sensitive it with mouse
+    float camSens = 0.02f; //How sensitive it with mouse
     private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
     private float totalRun = 1.0f;
+    private bool allowDrag = false;
 
     void Update()
     {
-        lastMouse = Input.mousePosition - lastMouse;
-        lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
-        lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x, transform.eulerAngles.y + lastMouse.y, 0);
-        //transform.eulerAngles = lastMouse;
-        lastMouse = Input.mousePosition;
-        //Mouse  camera angle done.  
+        if (Input.GetMouseButtonDown(0))
+        {
+            lastMouse = Input.mousePosition;
+            allowDrag = allowStartMouseDrag;
+        }
+
+        if (allowDrag && Input.GetMouseButton(0))
+        {
+            Vector3 delta = Input.mousePosition - lastMouse;
+            transform.Translate(-delta.x * camSens, -delta.y * camSens, 0);
+            lastMouse = Input.mousePosition;
+        }
 
         float mouseZoom = Input.mouseScrollDelta.y;
         float oldZoom = gameObject.GetComponent<Camera>().orthographicSize;
