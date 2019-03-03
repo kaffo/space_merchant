@@ -8,6 +8,7 @@ public class NodeConnections : MonoBehaviour
     public List<NodeConnections> nodesToConnect;
     public List<int> timeToTravel;
     public List<Defs.ConnectionTypes> nodeConnectionTypes;
+    public List<int> costToTravel;
 
     [Header("Connection Prefabs")]
     public GameObject connectionParent;
@@ -25,7 +26,7 @@ public class NodeConnections : MonoBehaviour
         }
 
         connectedNodes = new Dictionary<NodeConnections, Connection>();
-        if ( nodesToConnect.Count != timeToTravel.Count || nodesToConnect.Count != nodeConnectionTypes.Count)
+        if ( nodesToConnect.Count != timeToTravel.Count || nodesToConnect.Count != nodeConnectionTypes.Count || nodesToConnect.Count != costToTravel.Count )
         {
             Debug.LogError(gameObject.name + " has incorrectly setup data!");
             this.enabled = false;
@@ -39,6 +40,7 @@ public class NodeConnections : MonoBehaviour
 
             currentConnectionScript.nodeToConnect = nodesToConnect[i];
             currentConnectionScript.SetJumpCost(timeToTravel[i]);
+            currentConnectionScript.costToJump = costToTravel[i];
             currentConnectionScript.connectionType = nodeConnectionTypes[i];
             currentConnectionScript.enabled = true;
             connectedNodes.Add(nodesToConnect[i], currentConnectionScript);

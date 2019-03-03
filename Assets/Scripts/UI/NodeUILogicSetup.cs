@@ -166,13 +166,26 @@ public class NodeUILogicSetup : MonoBehaviour
 
             if (currentActiveNode != null && currentActiveNode.getActive())
             {
-                currentActiveNode.setActive(false);
-
                 NodeConnections currentActiveNodeConnections = currentActiveNode.GetComponent<NodeConnections>();
                 if (currentActiveNodeConnections != null && currentActiveNodeConnections.connectedNodes.ContainsKey(myConnections))
                 {
+                    Connection connectionScriptToMe = currentActiveNodeConnections.connectedNodes[myConnections];
+
+                    // If this is a Blue jump, work out if the player can afford the jump and deduct it from their account
+                    if (connectionScriptToMe.connectionType == Defs.ConnectionTypes.CONNECTIONTYPE_BLUE)
+                    {
+                        if (PlayerMoney.Instance.getPlayerCash() < connectionScriptToMe.costToJump)
+                        {
+                            Debug.Log("Not Enough Cash to make Jump");
+                            return;
+                        }
+                        PlayerMoney.Instance.IncrementPlayerCash(-connectionScriptToMe.costToJump);
+                    }
+
+                    currentActiveNode.setActive(false);
+
                     // Work out the time to pass based off the distance and the engine speed
-                    int timeToPass = currentActiveNodeConnections.connectedNodes[myConnections].GetCurrentJumpCost();
+                    int timeToPass = connectionScriptToMe.GetCurrentJumpCost();
                     TimeCounter.Instance.passTime(timeToPass);
                 } else
                 {

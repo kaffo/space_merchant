@@ -470,9 +470,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e8b53b938004840aabcee6b51deb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 10
   connectionType: 0
   nodeToConnect: {fileID: 0}
+  costToJump: 0
   connectionModel: {fileID: 8112075742315399402}
   distanceText: {fileID: 7662023885597979021}
   defaultConnectionMaterial: {fileID: 2100000, guid: 20e568d7c8dd6214ea5e1ee0e367d67d,

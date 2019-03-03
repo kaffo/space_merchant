@@ -23,5 +23,7 @@ public class NodeClick : MonoBehaviour
     private void OnMouseDown()
     {
         nodePanel.SetActive(!nodePanel.activeInHierarchy);
+        // Make sure the user is allowed to drag if their mouse was over the panel when they close it
+        if (!nodePanel.activeInHierarchy) { Camera.main.GetComponent<CameraControl>().allowStartMouseDrag = true; }
     }
 }

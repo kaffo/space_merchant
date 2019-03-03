@@ -8,6 +8,7 @@ public class Connection : MonoBehaviour
     [Header("Connection Setup")]
     public Defs.ConnectionTypes connectionType = Defs.ConnectionTypes.CONNECTIONTYPE_DEFAULT;
     public NodeConnections nodeToConnect;
+    public int costToJump = 0;
 
     [Header("Internal References")]
     public Transform connectionModel;
@@ -19,8 +20,8 @@ public class Connection : MonoBehaviour
     public Material redConnectionMaterial;
     public Material blueConnectionMaterial;
 
-    private int initialCost = 10;
-    private int currentCost = 10;
+    private int initialTravelTime = 10;
+    private int currentTravelTime = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +34,18 @@ public class Connection : MonoBehaviour
             return;
         }
 
-        distanceText.text = initialCost.ToString();
-
+        if (connectionType == Defs.ConnectionTypes.CONNECTIONTYPE_BLUE)
+        {
+            RectTransform panelTrasform = distanceText.transform.parent.GetComponent<RectTransform>();
+            distanceText.text = initialTravelTime.ToString() + "\n$" + costToJump.ToString();
+            Vector2 sizeDelta = panelTrasform.sizeDelta;
+            panelTrasform.sizeDelta = new Vector2(sizeDelta.x * 2, sizeDelta.y);
+            distanceText.GetComponent<RectTransform>().sizeDelta = new Vector2(panelTrasform.sizeDelta.y, panelTrasform.sizeDelta.x);
+        } else
+        {
+            distanceText.text = initialTravelTime.ToString();
+        }
+        
         Vector3 myStartPos = transform.position;
         Vector3 otherNodePos = nodeToConnect.transform.position;
         // Middle position to move the middle of the line to
@@ -76,19 +87,19 @@ public class Connection : MonoBehaviour
     public IEnumerator EngineUpgrade(Defs.EngineUpgrades engineUpgrade)
     {
         float modifer = Defs.Instance.engineUpgradesSpeeds[engineUpgrade];
-        currentCost = (int)((float)initialCost * modifer);
-        distanceText.text = currentCost.ToString();
+        currentTravelTime = (int)((float)initialTravelTime * modifer);
+        distanceText.text = currentTravelTime.ToString();
         yield return null;
     }
 
     public void SetJumpCost(int costToSet)
     {
-        initialCost = costToSet;
-        currentCost = initialCost;
+        initialTravelTime = costToSet;
+        currentTravelTime = initialTravelTime;
     }
 
     public int GetCurrentJumpCost()
     {
-        return currentCost;
+        return currentTravelTime;
     }
 }
