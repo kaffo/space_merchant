@@ -86,7 +86,7 @@ public class Good : MonoBehaviour
             int playerCash = PlayerMoney.Instance.getPlayerCash();
 
             // Set buy button state
-            if (buyQuantity > 0 && !PlayerCargo.Instance.CargoFull() && playerCash >= buyPrice && !TimeCounter.Instance.gameOver)
+            if (buyQuantity > 0 && !PlayerCargo.Instance.IsCargoFull() && playerCash >= buyPrice && !TimeCounter.Instance.gameOver)
             {
                 buyButton.interactable = true;
             }
@@ -104,6 +104,10 @@ public class Good : MonoBehaviour
             {
                 sellButton.interactable = false;
             }
+        } else
+        {
+            buyButton.interactable = false;
+            sellButton.interactable = false;
         }
     }
 
@@ -188,7 +192,7 @@ public class Good : MonoBehaviour
             return false;
         }
         
-        if (!PlayerCargo.Instance.CargoFull() && incrementBuyQuantity(-quantity))
+        if (!PlayerCargo.Instance.IsCargoFull() && incrementBuyQuantity(-quantity))
         {
             playerMoney.IncrementPlayerCash(-buyPrice);
             PlayerCargo.Instance.AddSingleCargo(good);

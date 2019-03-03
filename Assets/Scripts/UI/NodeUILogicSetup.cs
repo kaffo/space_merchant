@@ -182,6 +182,17 @@ public class NodeUILogicSetup : MonoBehaviour
                         PlayerMoney.Instance.IncrementPlayerCash(-connectionScriptToMe.costToJump);
                     }
 
+                    // If this is a Red jump, there's a chance an event will happen
+                    if (connectionScriptToMe.connectionType == Defs.ConnectionTypes.CONNECTIONTYPE_RED)
+                    {
+                        float randomChance = UnityEngine.Random.value;
+                        // Engine type has a factor in piracy chance
+                        if (randomChance < Defs.Instance.engineUpgradesPiracyChance[PlayerCargo.Instance.GetCurrentEngine()])
+                        {
+                            EventsManager.Instance.StartEvent(Defs.Events.EVENT_PIRATE_ONE);
+                        }
+                    }
+
                     currentActiveNode.setActive(false);
 
                     // Work out the time to pass based off the distance and the engine speed

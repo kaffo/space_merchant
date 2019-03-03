@@ -45,7 +45,7 @@ public class PlayerCargo : Singleton<PlayerCargo>
 
     public bool AddSingleCargo(Defs.TradeGoods good)
     {
-        if (!CargoFull())
+        if (!IsCargoFull())
         {
             Debug.Log("Adding new " + Defs.Instance.goodNames[good] + " to cargo");
             cargo[(int)good]++;
@@ -71,7 +71,13 @@ public class PlayerCargo : Singleton<PlayerCargo>
         }
     }
 
-    public bool CargoFull()
+    public void EmptyCargo()
+    {
+        cargo = new int[Enum.GetNames(typeof(Defs.TradeGoods)).Length];
+        UpdateUI();
+    }
+
+    public bool IsCargoFull()
     {
         if (TotalCargo() >= size)
         {
@@ -94,7 +100,7 @@ public class PlayerCargo : Singleton<PlayerCargo>
         }
     }
 
-    private int TotalCargo()
+    public int TotalCargo()
     {
         int total = 0;
         foreach (var cargoCount in cargo)

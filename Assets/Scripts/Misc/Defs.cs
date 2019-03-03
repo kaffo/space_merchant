@@ -84,29 +84,46 @@ public class Defs : Singleton<Defs>
         { TradeGoods.GOOD_FIREWORKS, 5}
     };
     #endregion
-    #region Upgrades
+    #region EngineUpgrades
     public enum EngineUpgrades
     {
         ENGINEUPRADE_DEFAULT = 0,
-        ENGINEUPRADE_GREEN_ONE = 1    
+        ENGINEUPRADE_GREEN_ONE = 1,
+        ENGINEUPRADE_RED_ONE = 2
     }
 
     // Engine Upgrade Names
     public Dictionary<EngineUpgrades, string> engineUpgradesNames = new Dictionary<EngineUpgrades, string>() {
         { EngineUpgrades.ENGINEUPRADE_DEFAULT, "Engine - Default"},
-        { EngineUpgrades.ENGINEUPRADE_GREEN_ONE, "Engine - Green - 1"}
+        { EngineUpgrades.ENGINEUPRADE_GREEN_ONE, "Engine - Green - 1"},
+        { EngineUpgrades.ENGINEUPRADE_RED_ONE, "Engine - Red - 1"}
     };
 
     // Engine Upgrades Speeds
     public Dictionary<EngineUpgrades, float> engineUpgradesSpeeds = new Dictionary<EngineUpgrades, float>() {
         { EngineUpgrades.ENGINEUPRADE_DEFAULT, 1f},
-        {EngineUpgrades.ENGINEUPRADE_GREEN_ONE, 0.9f}
+        {EngineUpgrades.ENGINEUPRADE_GREEN_ONE, 0.9f},
+        {EngineUpgrades.ENGINEUPRADE_RED_ONE, 0.85f}
     };
 
     // Engine Upgrade Prices
     public Dictionary<EngineUpgrades, float> engineUpgradesPrices = new Dictionary<EngineUpgrades, float>() {
         { EngineUpgrades.ENGINEUPRADE_DEFAULT, 100f},
-        { EngineUpgrades.ENGINEUPRADE_GREEN_ONE, 400f}
+        { EngineUpgrades.ENGINEUPRADE_GREEN_ONE, 400f},
+        { EngineUpgrades.ENGINEUPRADE_RED_ONE, 350f}
     };
+
+    // Engine Upgrade Prices
+    public Dictionary<EngineUpgrades, float> engineUpgradesPiracyChance = new Dictionary<EngineUpgrades, float>() {
+        { EngineUpgrades.ENGINEUPRADE_DEFAULT, 0.99f},
+        { EngineUpgrades.ENGINEUPRADE_GREEN_ONE, 0.85f},
+        { EngineUpgrades.ENGINEUPRADE_RED_ONE, 0.75f}
+    };
+    #endregion
+    #region Events
+    public enum Events
+    {
+        EVENT_PIRATE_ONE = 0
+    }
     #endregion
 }
