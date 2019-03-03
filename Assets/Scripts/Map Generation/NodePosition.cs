@@ -59,7 +59,6 @@ public class NodePosition : MonoBehaviour
         }
         if (doArrange)
         {
-            Debug.Log(arrangeFrameCount);
             arrangeFrameCount++;
             foreach (NodeConnections nodeConnectionScript in nodesToArrange)
             {

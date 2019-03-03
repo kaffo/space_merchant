@@ -66,6 +66,25 @@ public class GraphImport : EditorWindow
                 graphDict[currentNode].Add(otherNode, weight);
             }
 
+            List<string> keyList = new List<string>(graphDict.Keys);
+            foreach (string nodeValue in keyList)
+            {
+                Dictionary<string, int> graphConnections = graphDict[nodeValue];
+                foreach (string nodeValueToConnect in graphConnections.Keys)
+                {
+                    // Check if there are any missing nodes from the list due to one way connections
+                    if (!nodeConnectionsDict.ContainsKey(nodeValueToConnect))
+                    {
+                        graphDict.Add(nodeValueToConnect, new Dictionary<string, int>());
+                        GameObject nodeGameObject = Instantiate(nodePrefab, mapParent.transform);
+                        nodeGameObject.name = nodeValueToConnect;
+                        NodeConnections nodeConnectionsScript = nodeGameObject.GetComponent<NodeConnections>();
+                        nodeConnectionsDict.Add(nodeValueToConnect, nodeConnectionsScript);
+                        nodeGameObject.transform.localPosition = new Vector3(UnityEngine.Random.Range(-100, 100), UnityEngine.Random.Range(-100, 100), 0f);
+                    }
+                }
+            }
+
             foreach (string nodeValue in graphDict.Keys)
             {
                 Dictionary<string, int> graphConnections = graphDict[nodeValue];
