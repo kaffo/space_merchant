@@ -43,7 +43,8 @@ public class EventsManager : Singleton<EventsManager>
                 }
                 else
                 {
-                    continuePopupScript.SetupLetter("Uh oh, Pirates!\n\nThey demanded money from me, but I had so little they just laughed through the comm.\n\nI heard one say \"That pilot is fucked\" before they hung up.");
+                    continuePopupScript.SetupLetter("Uh oh, Pirates!\n\nThey demanded money from me, but I had so little they just laughed through the comm.\n\n" +
+                        "I heard one say \"That pilot is fucked\" before they hung up.");
                 }
                 break;
         }
