@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5240076250167396683}
   - component: {fileID: 5676157850795022395}
   - component: {fileID: 4332502710867795493}
-  - component: {fileID: 7784900728682778251}
   - component: {fileID: 809756613495460765}
   m_Layer: 0
   m_Name: Node
@@ -54,6 +53,7 @@ MonoBehaviour:
   nodesToConnect: []
   timeToTravel: 
   nodeConnectionTypes: 
+  costToTravel: 
   connectionParent: {fileID: 5613863911473610894}
   connectionPrefab: {fileID: 6859955233388997608, guid: 9db7d81e5e0987841a46d3e2f00edacc,
     type: 3}
@@ -92,19 +92,6 @@ MonoBehaviour:
   jumpButton: {fileID: 0}
   goodsParent: {fileID: 0}
   nodeConnectionsScript: {fileID: 5240076250167396683}
---- !u!114 &7784900728682778251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186289146422354945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed83a552f2bbf474290b20f69e2dade1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
 --- !u!114 &809756613495460765
 MonoBehaviour:
   m_ObjectHideFlags: 0
