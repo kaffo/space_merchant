@@ -8,6 +8,7 @@ TagManager:
   - JumpTimePanel
   - PanelCanvas
   - NodeNameCanvas
+  - MapParent
   layers:
   - Default
   - TransparentFX

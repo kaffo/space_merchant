@@ -18,6 +18,8 @@ public class CameraControl : MonoBehaviour
     public float minYPos = -25f;
     public float maxYPos = 25f;
 
+    public float maxZoom = 20f;
+
     public bool allowStartMouseDrag = true;
 
     float mainSpeed = 10.0f; //regular speed
@@ -46,7 +48,7 @@ public class CameraControl : MonoBehaviour
 
         float mouseZoom = Input.mouseScrollDelta.y;
         float oldZoom = gameObject.GetComponent<Camera>().orthographicSize;
-        gameObject.GetComponent<Camera>().orthographicSize = Mathf.Clamp(oldZoom + -(mouseZoom * zoomSpeed), 0.5f, 20f);
+        gameObject.GetComponent<Camera>().orthographicSize = Mathf.Clamp(oldZoom + -(mouseZoom * zoomSpeed), 0.5f, maxZoom);
 
         //Keyboard commands
         Vector3 p = GetBaseInput();
