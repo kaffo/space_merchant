@@ -26,7 +26,7 @@ public class UILogicSetup : MonoBehaviour
     private void BuyMedicineButtonClicked()
     {
         PlayerMoney playerMoney = PlayerMoney.Instance;
-        if (!playerMoney.CheckCash(playerMoney.getPlayerCash() - 500))
+        if (!playerMoney.CheckCash(playerMoney.GetPlayerCash() - 500))
         {
             Debug.Log("Medicine Purchase Failed");
             return;

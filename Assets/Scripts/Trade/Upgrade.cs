@@ -85,7 +85,7 @@ public class Upgrade : MonoBehaviour
     public bool BuyUpgrade()
     {
         PlayerMoney playerMoney = PlayerMoney.Instance;
-        if (!playerMoney.CheckCash(playerMoney.getPlayerCash() - buyPrice))
+        if (!playerMoney.CheckCash(playerMoney.GetPlayerCash() - buyPrice))
         {
             Debug.Log("Purchase Failed");
             return false;

@@ -83,7 +83,7 @@ public class Good : MonoBehaviour
         //Only activate trade UI on active node
         if (activeNodeScript.getActive())
         {
-            int playerCash = PlayerMoney.Instance.getPlayerCash();
+            int playerCash = PlayerMoney.Instance.GetPlayerCash();
 
             // Set buy button state
             if (buyQuantity > 0 && !PlayerCargo.Instance.IsCargoFull() && playerCash >= buyPrice && !TimeCounter.Instance.gameOver)
@@ -186,7 +186,7 @@ public class Good : MonoBehaviour
     public bool BuyGood(int quantity)
     {
         PlayerMoney playerMoney = PlayerMoney.Instance;
-        if (!playerMoney.CheckCash(playerMoney.getPlayerCash() - quantity * buyPrice))
+        if (!playerMoney.CheckCash(playerMoney.GetPlayerCash() - quantity * buyPrice))
         {
             Debug.Log("Purchase Failed");
             return false;

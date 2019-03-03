@@ -123,7 +123,8 @@ public class Defs : Singleton<Defs>
     #region Events
     public enum Events
     {
-        EVENT_PIRATE_ONE = 0
+        EVENT_PIRATE_ONE = 0,
+        EVENT_PIRATE_TWO = 1
     }
     #endregion
 }

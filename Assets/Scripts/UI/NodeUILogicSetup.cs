@@ -174,7 +174,7 @@ public class NodeUILogicSetup : MonoBehaviour
                     // If this is a Blue jump, work out if the player can afford the jump and deduct it from their account
                     if (connectionScriptToMe.connectionType == Defs.ConnectionTypes.CONNECTIONTYPE_BLUE)
                     {
-                        if (PlayerMoney.Instance.getPlayerCash() < connectionScriptToMe.costToJump)
+                        if (PlayerMoney.Instance.GetPlayerCash() < connectionScriptToMe.costToJump)
                         {
                             Debug.Log("Not Enough Cash to make Jump");
                             return;
@@ -189,7 +189,10 @@ public class NodeUILogicSetup : MonoBehaviour
                         // Engine type has a factor in piracy chance
                         if (randomChance < Defs.Instance.engineUpgradesPiracyChance[PlayerCargo.Instance.GetCurrentEngine()])
                         {
-                            EventsManager.Instance.StartEvent(Defs.Events.EVENT_PIRATE_ONE);
+                            // 50/50 chance of either pirate event
+                            if (UnityEngine.Random.value > 0.5f) { EventsManager.Instance.StartEvent(Defs.Events.EVENT_PIRATE_ONE); }
+                            else { EventsManager.Instance.StartEvent(Defs.Events.EVENT_PIRATE_TWO); }
+                            
                         }
                     }
 

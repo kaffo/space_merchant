@@ -20,7 +20,7 @@ public class PlayerMoney : Singleton<PlayerMoney>
         if (moneyText != null) { moneyText.text = "Money $" + playerCash; };
     }
 
-    public int getPlayerCash()
+    public int GetPlayerCash()
     {
         return playerCash;
     }
