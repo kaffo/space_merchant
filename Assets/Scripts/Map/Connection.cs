@@ -34,18 +34,19 @@ public class Connection : MonoBehaviour
             return;
         }
 
-        if (connectionType == Defs.ConnectionTypes.CONNECTIONTYPE_BLUE)
+        // Set Distance Panel Size
+        if (connectionType == Defs.ConnectionTypes.CONNECTIONTYPE_BLUE || connectionType == Defs.ConnectionTypes.CONNECTIONTYPE_RED)
         {
             RectTransform panelTrasform = distanceText.transform.parent.GetComponent<RectTransform>();
-            distanceText.text = initialTravelTime.ToString() + "\n$" + costToJump.ToString();
+            
             Vector2 sizeDelta = panelTrasform.sizeDelta;
             panelTrasform.sizeDelta = new Vector2(sizeDelta.x * 2, sizeDelta.y);
             distanceText.GetComponent<RectTransform>().sizeDelta = new Vector2(panelTrasform.sizeDelta.y, panelTrasform.sizeDelta.x);
-        } else
-        {
-            distanceText.text = initialTravelTime.ToString();
         }
-        
+
+        // Make sure the UI has the right text
+        UpdateUI(PlayerCargo.Instance.GetCurrentEngine());
+
         Vector3 myStartPos = transform.position;
         Vector3 otherNodePos = nodeToConnect.transform.position;
         // Middle position to move the middle of the line to
@@ -84,11 +85,28 @@ public class Connection : MonoBehaviour
         }
     }
 
-    public IEnumerator EngineUpgrade(Defs.EngineUpgrades engineUpgrade)
+    public void UpdateUI(Defs.EngineUpgrades engineUpgrade = Defs.EngineUpgrades.ENGINEUPRADE_DEFAULT)
     {
         float modifer = Defs.Instance.engineUpgradesSpeeds[engineUpgrade];
         currentTravelTime = (int)((float)initialTravelTime * modifer);
-        distanceText.text = currentTravelTime.ToString();
+        switch (connectionType)
+        {
+            case Defs.ConnectionTypes.CONNECTIONTYPE_BLUE:
+                distanceText.text = currentTravelTime.ToString() + "\n$" + costToJump.ToString();
+                break;
+            case Defs.ConnectionTypes.CONNECTIONTYPE_RED:
+                string piracyChance = (Defs.Instance.engineUpgradesPiracyChance[engineUpgrade] * 100).ToString();
+                distanceText.text = currentTravelTime.ToString() + "\n!" + piracyChance + "%!";
+                break;
+            default:
+                distanceText.text = currentTravelTime.ToString();
+                break;
+        }
+    }
+
+    public IEnumerator EngineUpgrade(Defs.EngineUpgrades engineUpgrade)
+    {
+        UpdateUI(engineUpgrade);
         yield return null;
     }
 
@@ -96,6 +114,7 @@ public class Connection : MonoBehaviour
     {
         initialTravelTime = costToSet;
         currentTravelTime = initialTravelTime;
+        UpdateUI(PlayerCargo.Instance.GetCurrentEngine());
     }
 
     public int GetCurrentJumpCost()
