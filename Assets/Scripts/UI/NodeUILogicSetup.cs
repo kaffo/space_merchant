@@ -83,9 +83,15 @@ public class NodeUILogicSetup : MonoBehaviour
 
         jumpButton.onClick.AddListener(JumpButtonClick);
 
+        List<(Defs.TradeGoods, Defs.TradeGoodTypes)> goodsToAdd = new List<(Defs.TradeGoods, Defs.TradeGoodTypes)>();
+        CreateGoodsList(goodsToAdd);
+
         float currentHeight = 0f;
-        foreach (Defs.TradeGoods good in nodeParametersScript.avaliableTradeGoods)
+        foreach ((Defs.TradeGoods, Defs.TradeGoodTypes) goodPair in goodsToAdd)
         {
+            Defs.TradeGoods good = goodPair.Item1;
+            Defs.TradeGoodTypes goodType = goodPair.Item2;
+
             // Make a new prefab for each good
             GameObject goodsPrefab = Instantiate<GameObject>(goodsUIParent, goodsParent.transform);
 
@@ -104,7 +110,8 @@ public class NodeUILogicSetup : MonoBehaviour
             // Set the Good script up
             Good goodScript = Defs.Instance.AddGoodScript(good, goodsPrefab);
             if (goodScript != null) {
-                goodScript.good = good;
+                goodScript.myGood = good;
+                goodScript.myGoodType = goodType;
                 goodScript.activeNodeScript = nodeScript;
                 goodScript.myUIReferences = goodUIReferences;
                 goodScript.enabled = true;
@@ -156,6 +163,35 @@ public class NodeUILogicSetup : MonoBehaviour
         }
     }
 
+    private void CreateGoodsList(List<(Defs.TradeGoods, Defs.TradeGoodTypes)> goodsToAdd)
+    {
+        if (goodsToAdd == null) { goodsToAdd = new List<(Defs.TradeGoods, Defs.TradeGoodTypes)>(); }
+
+        // Add all the To Buys first
+        foreach (Defs.TradeGoods goodToBuy in nodeParametersScript.tradeGoodsToBuy)
+        {
+            goodsToAdd.Add((goodToBuy, Defs.TradeGoodTypes.TRADEGOODTYPE_BUY));
+        }
+
+        // Now for each To Sell check if there's already an empty To Buy, set it to Both, or add a Sell
+        foreach (Defs.TradeGoods goodToSell in nodeParametersScript.tradeGoodsToSell)
+        {
+            bool added = false;
+            for (int i = 0; i < goodsToAdd.Count; i++)
+            {
+                (Defs.TradeGoods, Defs.TradeGoodTypes) goodPair = goodsToAdd[i];
+                if (goodToSell == goodPair.Item1 && goodPair.Item2 == Defs.TradeGoodTypes.TRADEGOODTYPE_BUY)
+                {
+                    goodPair.Item2 = Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH;
+                    goodsToAdd[i] = goodPair;
+                    added = true;
+                    break;
+                }
+            }
+
+            if (!added) { goodsToAdd.Add((goodToSell, Defs.TradeGoodTypes.TRADEGOODTYPE_SELL)); ; }
+        }
+    }
 
     private void JumpButtonClick()
     {

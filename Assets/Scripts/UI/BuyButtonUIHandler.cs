@@ -25,7 +25,7 @@ public class BuyButtonUIHandler : MonoBehaviour
         IEnumerator currentSellPriceMethod;
         foreach (var goodScript in ObjectManager.Instance.globalGoodList)
         {
-            currentSellPriceMethod = goodScript.CheckSellPriceCheaper(myGoodScript.good, myGoodScript.getBuyPrice());
+            currentSellPriceMethod = goodScript.CheckSellPriceCheaper(myGoodScript.myGood, myGoodScript.getBuyPrice());
             StartCoroutine(currentSellPriceMethod);
         }
     }

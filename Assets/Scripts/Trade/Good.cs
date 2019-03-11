@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Good : MonoBehaviour
 {
     [Header("Good Setup")]
-    public Defs.TradeGoods good;
+    public Defs.TradeGoods myGood;
+    public Defs.TradeGoodTypes myGoodType;
     
     [Header("Scripts")]
     public ActiveNode activeNodeScript;
@@ -38,18 +39,18 @@ public class Good : MonoBehaviour
         ObjectManager.Instance.globalGoodList.Add(this);
 
         // Determine Starting Buy Price
-        float startPrice = Defs.Instance.goodStartPrice[good];
-        float pDifference = Defs.Instance.goodPriceDifference[good];
-        float minPrice = Defs.Instance.goodMinPrice[good];
-        float maxPrice = Defs.Instance.goodMaxPrice[good];
+        float startPrice = Defs.Instance.goodStartPrice[myGood];
+        float pDifference = Defs.Instance.goodPriceDifference[myGood];
+        float minPrice = Defs.Instance.goodMinPrice[myGood];
+        float maxPrice = Defs.Instance.goodMaxPrice[myGood];
         buyPrice = (int)Mathf.Clamp(Mathf.Floor(Random.Range(startPrice - pDifference, startPrice + pDifference)), minPrice, maxPrice);
 
         // Determine Starting Sell Price
         sellPrice = (int)Mathf.Clamp(Mathf.Floor(Random.Range(startPrice - pDifference, startPrice + pDifference)), minPrice, maxPrice);
 
         // Determine Starting Price
-        int startQuatity = Defs.Instance.goodStartQuantity[good];
-        int qDifference = Defs.Instance.goodQuantityDifference[good];
+        int startQuatity = Defs.Instance.goodStartQuantity[myGood];
+        int qDifference = Defs.Instance.goodQuantityDifference[myGood];
         buyQuantity = (int)Mathf.Floor(Random.Range(startQuatity - qDifference, startQuatity + qDifference));
         sellQuantity = (int)Mathf.Floor(Random.Range(startQuatity - qDifference, startQuatity + qDifference));
 
@@ -73,12 +74,23 @@ public class Good : MonoBehaviour
             return;
         }
 
+        // Disable UI depending on buying or selling
+        if (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BUY || myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_NONE)
+        {
+            sellButton.gameObject.SetActive(false);
+        }
+
+        if (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_SELL || myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_NONE)
+        {
+            buyButton.gameObject.SetActive(false);
+        }
+
         updateUI();
     }
 
     public void updateUI()
     {
-        goodText.text = Defs.Instance.goodNames[good];
+        goodText.text = Defs.Instance.goodNames[myGood];
         buyText.text = buyQuantity + " - B - $" + buyPrice;
         sellText.text = sellQuantity + " - S - $" + sellPrice;
 
@@ -98,7 +110,7 @@ public class Good : MonoBehaviour
             }
 
             // Set sell button state
-            if (sellQuantity > 0 && PlayerCargo.Instance.HasGood(good) && !TimeCounter.Instance.gameOver)
+            if (sellQuantity > 0 && PlayerCargo.Instance.HasGood(myGood) && !TimeCounter.Instance.gameOver)
             {
                 sellButton.interactable = true;
             }
@@ -120,7 +132,7 @@ public class Good : MonoBehaviour
 
     public void setBuyPrice(int newPrice)
     {
-        buyPrice = (int)Mathf.Clamp(newPrice, Defs.Instance.goodMinPrice[good], Defs.Instance.goodMaxPrice[good]);
+        buyPrice = (int)Mathf.Clamp(newPrice, Defs.Instance.goodMinPrice[myGood], Defs.Instance.goodMaxPrice[myGood]);
         updateUI();
     }
 
@@ -131,7 +143,7 @@ public class Good : MonoBehaviour
 
     public void setSellPrice(int newPrice)
     {
-        sellPrice = (int)Mathf.Clamp(newPrice, Defs.Instance.goodMinPrice[good], Defs.Instance.goodMaxPrice[good]);
+        sellPrice = (int)Mathf.Clamp(newPrice, Defs.Instance.goodMinPrice[myGood], Defs.Instance.goodMaxPrice[myGood]);
         updateUI();
     }
 
@@ -187,6 +199,12 @@ public class Good : MonoBehaviour
 
     public bool BuyGood(int quantity)
     {
+        if (!(myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BUY || myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH))
+        {
+            Debug.LogError("Tried to buy " + Defs.Instance.goodNames[myGood] + " but this Good is " + myGoodType);
+            return false;
+        }
+
         PlayerMoney playerMoney = PlayerMoney.Instance;
         if (!playerMoney.CheckCash(playerMoney.GetPlayerCash() - quantity * buyPrice))
         {
@@ -197,8 +215,8 @@ public class Good : MonoBehaviour
         if (!PlayerCargo.Instance.IsCargoFull() && incrementBuyQuantity(-quantity))
         {
             playerMoney.IncrementPlayerCash(-buyPrice);
-            PlayerCargo.Instance.AddSingleCargo(good);
-            Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + buyPrice * quantity);
+            PlayerCargo.Instance.AddSingleCargo(myGood);
+            Debug.Log("Bought " + quantity + " " + Defs.Instance.goodNames[myGood] + " for $" + buyPrice * quantity);
             setBuyPrice(buyPrice + (int)((float)buyPrice / 100f * 10f));
 
             // Pass time for each unit bought
@@ -219,12 +237,18 @@ public class Good : MonoBehaviour
 
     public bool SellGood(int quantity)
     {
+        if (!(myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_SELL || myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH))
+        {
+            Debug.LogError("Tried to sell " + Defs.Instance.goodNames[myGood] + " but this Good is " + myGoodType);
+            return false;
+        }
+
         // Check player cargo first
-        if (PlayerCargo.Instance.HasGood(good) && incrementSellQuantity(-quantity))
+        if (PlayerCargo.Instance.HasGood(myGood) && incrementSellQuantity(-quantity))
         {
             PlayerMoney.Instance.IncrementPlayerCash(sellPrice);
-            PlayerCargo.Instance.RemoveSingleCargo(good);
-            Debug.Log("Sold " + quantity + " " + Defs.Instance.goodNames[good] + " for $" + sellPrice * quantity);
+            PlayerCargo.Instance.RemoveSingleCargo(myGood);
+            Debug.Log("Sold " + quantity + " " + Defs.Instance.goodNames[myGood] + " for $" + sellPrice * quantity);
             setSellPrice(sellPrice - (int)((float)sellPrice / 100f * 10f));
             TimeCounter.Instance.passTime(quantity);
             return true;
@@ -236,7 +260,7 @@ public class Good : MonoBehaviour
 
     public IEnumerator CheckSellPriceCheaper(Defs.TradeGoods goodToCheck, int priceToCheck)
     {
-        if (goodToCheck == good && sellQuantity > 1 && sellPrice > priceToCheck)
+        if (goodToCheck == myGood && sellQuantity > 1 && sellPrice > priceToCheck)
         {
             SetSellButtonHilight(true);
         } else
@@ -256,12 +280,12 @@ public class Good : MonoBehaviour
         for (int i = 0; i < timesToStep; i++)
         {
             // A low chance that something happens to each value
-            if (Random.value > 0.99)
+            if (Random.value > 0.99 && (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BUY || myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH))
             {
                 incrementBuyQuantity(1);
                 setBuyPrice(buyPrice - (int)((float)buyPrice / 100f * 10f));
             }
-            if (Random.value > 0.99)
+            if (Random.value > 0.99 && (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_SELL || myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH))
             {
                 incrementSellQuantity(1);
                 setSellPrice(sellPrice + (int)((float)sellPrice / 100f * 10f));

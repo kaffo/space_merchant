@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NodeParameters : MonoBehaviour
 {
-    public Defs.TradeGoods[] avaliableTradeGoods;
+    public Defs.TradeGoods[] tradeGoodsToBuy;
+    public Defs.TradeGoods[] tradeGoodsToSell;
     public Defs.EngineUpgrades[] avalaibleEngineUpgrades;
 }

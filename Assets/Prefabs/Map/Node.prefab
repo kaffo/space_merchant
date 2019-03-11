@@ -69,7 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 00000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &4332502710867795493
 MonoBehaviour:

@@ -23,6 +23,14 @@ public class Defs : Singleton<Defs>
         GOOD_MEDICINE = 2
     }
 
+    public enum TradeGoodTypes
+    {
+        TRADEGOODTYPE_NONE = -1,
+        TRADEGOODTYPE_BUY = 0,
+        TRADEGOODTYPE_SELL = 1,
+        TRADEGOODTYPE_BOTH = 2
+    }
+
     // Good Scripts
     public Good AddGoodScript(TradeGoods good, GameObject parent)
     {
