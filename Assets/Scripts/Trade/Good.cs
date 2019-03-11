@@ -279,13 +279,57 @@ public class Good : MonoBehaviour
     {
         for (int i = 0; i < timesToStep; i++)
         {
+            // If both, empty reserves first
+            if (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH && buyQuantity > 0 && sellQuantity > 0)
+            {
+                incrementBuyQuantity(-1);
+                setBuyPrice(buyPrice + (int)((float)buyPrice / 100f * 10f));
+                incrementSellQuantity(-1);
+                setSellPrice(sellPrice - (int)((float)sellPrice / 100f * 10f));
+            }
+
+            // If both, either produce 1 buy, 1 sell, 2 buy or 2 sell
+            if (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH && Random.value > 0.99)
+            {
+                float diceRoll = Random.value;
+                // Increment Buy
+                if (diceRoll < 0.34)
+                {
+                    if (incrementSellQuantity(-1))
+                    {
+                        setSellPrice(sellPrice - (int)((float)sellPrice / 100f * 10f));
+                    } else
+                    {
+                        incrementBuyQuantity(1);
+                        setBuyPrice(buyPrice - (int)((float)buyPrice / 100f * 10f));
+                    }
+                } else if (diceRoll > 0.33 && diceRoll < 0.67)
+                {
+                    if (incrementBuyQuantity(-1))
+                    {
+                        setBuyPrice(buyPrice + (int)((float)buyPrice / 100f * 10f));
+                    } else
+                    {
+                        incrementSellQuantity(1);
+                        setSellPrice(sellPrice + (int)((float)sellPrice / 100f * 10f));
+                    }
+                } else if (diceRoll > 0.66 && diceRoll < 0.84)
+                {
+                    incrementBuyQuantity(1);
+                    setBuyPrice(buyPrice - (int)((float)buyPrice / 100f * 10f));
+                } else if (diceRoll > 0.83)
+                {
+                    incrementSellQuantity(1);
+                    setSellPrice(sellPrice + (int)((float)sellPrice / 100f * 10f));
+                }
+            }
             // A low chance that something happens to each value
-            if (Random.value > 0.99 && (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BUY || myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH))
+            if (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BUY && Random.value > 0.99)
             {
                 incrementBuyQuantity(1);
                 setBuyPrice(buyPrice - (int)((float)buyPrice / 100f * 10f));
             }
-            if (Random.value > 0.99 && (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_SELL || myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_BOTH))
+            if (myGoodType == Defs.TradeGoodTypes.TRADEGOODTYPE_SELL && Random.value > 0.99)
             {
                 incrementSellQuantity(1);
                 setSellPrice(sellPrice + (int)((float)sellPrice / 100f * 10f));

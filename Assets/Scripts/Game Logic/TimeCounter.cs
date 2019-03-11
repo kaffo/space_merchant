@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class TimeCounter : Singleton<TimeCounter>
 {
-    public Text textToUpdate;
+    public Text timeText;
+    public Text fatherHealthText;
     public ClickToContinuePopup popupScript;
     public bool gameOver = false;
 
     private int timeLeft = 250;
     private int timePassed = 0;
+    private int fathersHealth = 100;
 
     private void Start()
     {
-        if (textToUpdate == null || popupScript == null)
+        if (timeText == null || fatherHealthText  == null || popupScript == null)
         {
             Debug.LogError(this.name + " setup error!");
             this.enabled = false;
@@ -25,14 +27,17 @@ public class TimeCounter : Singleton<TimeCounter>
 
     private void UpdateUI()
     {
+        
         if (gameOver)
         {
             Debug.Log("Your Father Has Died...");
-            textToUpdate.text = "Your Father has died...";
+            timeText.text = "Your Father has died...";
+            fatherHealthText.text = "";
             popupScript.SetupLetter("My Father has died...\n\nFor " + timePassed + " long hours I struggled, however it is apparent I could not do enough...\n\nMaybe I could have done more, or maybe this outcome was always inevitable. But it is too late for these thoughts now.\n\nInstead I must turn my attention to my children and build a future for them.\n\nGod forbid I ever fall ill like my Father and my children must bear the burden as I have....");
         } else
         {
-            textToUpdate.text = "Time Left: " + timeLeft;
+            timeText.text = "Time Left: " + timeLeft;
+            fatherHealthText.text = "Father Health: " + fathersHealth;
         }
     }
 
@@ -66,14 +71,35 @@ public class TimeCounter : Singleton<TimeCounter>
     {
         if (!gameOver)
         {
-            // Can't have less than 0 time
-            int newTimeLeft = (int)Mathf.Max(timeLeft - timeToPass, 0f);
+            // Pass Time
+            int newTimeLeft = timeLeft - timeToPass;
 
-            // Track time passed but don't track past 0
+            // Track time passed
             timePassed += timeLeft - newTimeLeft;
             timeLeft = newTimeLeft;
 
-            if (timeLeft <= 0) { SetGameOver(true); }
+            // Next time check?
+            if (timeLeft <= 0)
+            {
+                PlayerCargo playerCargo = PlayerCargo.Instance;
+                // Check player inventory for Medicine
+                if (playerCargo.HasGood(Defs.TradeGoods.GOOD_MEDICINE))
+                {
+                    playerCargo.RemoveSingleCargo(Defs.TradeGoods.GOOD_MEDICINE);
+                    Debug.Log("Payed Medicine for Father");
+                } else
+                {
+                    // Min 20 damage, Max 50
+                    int fatherDamage = (int)(Random.value * 30) + 20;
+                    fathersHealth -= fatherDamage;
+                    Debug.Log("No Medicine Avaliable, Father taking " + fatherDamage + " damage down to " + fathersHealth);
+                }
+
+                // Reset time left
+                timeLeft += 250;
+            }
+
+            if (fathersHealth <= 0) { SetGameOver(true); }
 
             Debug.Log("Time Left: " + timeLeft);
             StepEconomy(timeToPass);

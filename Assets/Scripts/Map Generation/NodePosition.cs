@@ -30,10 +30,12 @@ public class NodePosition : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     private void OnEnable()
     {
         EditorApplication.update += UpdateNodePosition;
     }
+#endif
 
     public void ArrangeNodes()
     {
