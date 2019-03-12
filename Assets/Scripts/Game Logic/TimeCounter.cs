@@ -36,7 +36,7 @@ public class TimeCounter : Singleton<TimeCounter>
             popupScript.SetupLetter("My Father has died...\n\nFor " + timePassed + " long hours I struggled, however it is apparent I could not do enough...\n\nMaybe I could have done more, or maybe this outcome was always inevitable. But it is too late for these thoughts now.\n\nInstead I must turn my attention to my children and build a future for them.\n\nGod forbid I ever fall ill like my Father and my children must bear the burden as I have....");
         } else
         {
-            timeText.text = "Time Left: " + timeLeft;
+            timeText.text = "Time Until Next Dose: " + timeLeft;
             fatherHealthText.text = "Father Health: " + fathersHealth;
         }
     }
@@ -95,8 +95,10 @@ public class TimeCounter : Singleton<TimeCounter>
                     Debug.Log("No Medicine Avaliable, Father taking " + fatherDamage + " damage down to " + fathersHealth);
                 }
 
+                float reduceTime = (timePassed * 0.02f);
+                Debug.Log("Reduce Time Given by: " + reduceTime);
                 // Reset time left
-                timeLeft += 250;
+                timeLeft += (int)(250f - reduceTime);
             }
 
             if (fathersHealth <= 0) { SetGameOver(true); }
