@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect:
   - {fileID: 6774134851968999022}
-  timeToTravel: c5000000
+  timeToTravel: 62000000
   nodeConnectionTypes: 00000000
   costToTravel: 00000000
   connectionParent: {fileID: 6774134851583404696}
@@ -287,7 +287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134850793076635
 MonoBehaviour:
@@ -498,7 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect:
   - {fileID: 6774134851684932914}
-  timeToTravel: 85000000
+  timeToTravel: 42000000
   nodeConnectionTypes: 00000000
   costToTravel: 00000000
   connectionParent: {fileID: 6774134851459930165}
@@ -516,7 +517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134850890782408
 MonoBehaviour:
@@ -1256,7 +1258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect:
   - {fileID: 6774134851021122391}
-  timeToTravel: ab000000
+  timeToTravel: 55000000
   nodeConnectionTypes: 00000000
   costToTravel: 00000000
   connectionParent: {fileID: 6774134851409661720}
@@ -1274,7 +1276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851003993534
 MonoBehaviour:
@@ -1379,7 +1382,7 @@ MonoBehaviour:
   nodesToConnect:
   - {fileID: 6774134851123287184}
   - {fileID: 6774134852858798577}
-  timeToTravel: a6000000b5000000
+  timeToTravel: 530000005a000000
   nodeConnectionTypes: 0000000000000000
   costToTravel: 0000000000000000
   connectionParent: {fileID: 6774134851729953587}
@@ -1397,7 +1400,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851018066355
 MonoBehaviour:
@@ -1609,7 +1613,7 @@ MonoBehaviour:
   nodesToConnect:
   - {fileID: 6774134851003993532}
   - {fileID: 6774134852799287231}
-  timeToTravel: ab0000008c000000
+  timeToTravel: 5500000046000000
   nodeConnectionTypes: 0000000000000000
   costToTravel: 0000000000000000
   connectionParent: {fileID: 6774134851489149353}
@@ -1627,7 +1631,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851021122385
 MonoBehaviour:
@@ -1915,7 +1920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect:
   - {fileID: 6774134851815938303}
-  timeToTravel: 72000000
+  timeToTravel: 39000000
   nodeConnectionTypes: 00000000
   costToTravel: 00000000
   connectionParent: {fileID: 6774134851433159357}
@@ -1933,7 +1938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851043994027
 MonoBehaviour:
@@ -1995,7 +2001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6774134851085005750}
   m_Layer: 0
-  m_Name: Map
+  m_Name: MapOne
   m_TagString: MapParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2171,7 +2177,7 @@ MonoBehaviour:
   - {fileID: 6774134851180738123}
   - {fileID: 6774134851018066353}
   - {fileID: 6774134852799287231}
-  timeToTravel: 6f000000a600000088000000
+  timeToTravel: 370000005300000044000000
   nodeConnectionTypes: 000000000000000000000000
   costToTravel: 000000000000000000000000
   connectionParent: {fileID: 6774134851240122137}
@@ -2189,7 +2195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851123287186
 MonoBehaviour:
@@ -2294,7 +2301,7 @@ MonoBehaviour:
   nodesToConnect:
   - {fileID: 6774134851180738123}
   - {fileID: 6774134852726497131}
-  timeToTravel: 5b00000088000000
+  timeToTravel: 2d00000044000000
   nodeConnectionTypes: 0000000000000000
   costToTravel: 0000000000000000
   connectionParent: {fileID: 6774134852019945685}
@@ -2312,7 +2319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851133377321
 MonoBehaviour:
@@ -2557,7 +2565,7 @@ MonoBehaviour:
   - {fileID: 6774134852053290036}
   - {fileID: 6774134851939069770}
   - {fileID: 6774134851133377327}
-  timeToTravel: 6f000000ba000000ab000000770000005b000000
+  timeToTravel: 370000005d000000550000003b0000002d000000
   nodeConnectionTypes: 0000000000000000000000000000000000000000
   costToTravel: 0000000000000000000000000000000000000000
   connectionParent: {fileID: 6774134851669022573}
@@ -2575,7 +2583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851180738117
 MonoBehaviour:
@@ -4479,7 +4488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect:
   - {fileID: 6774134851939069770}
-  timeToTravel: 98000000
+  timeToTravel: 4c000000
   nodeConnectionTypes: 00000000
   costToTravel: 00000000
   connectionParent: {fileID: 6774134851134957298}
@@ -4497,7 +4506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851669515591
 MonoBehaviour:
@@ -4680,7 +4690,7 @@ MonoBehaviour:
   - {fileID: 6774134850890782414}
   - {fileID: 6774134851968999022}
   - {fileID: 6774134852726497131}
-  timeToTravel: 85000000c800000049000000
+  timeToTravel: 420000006400000024000000
   nodeConnectionTypes: 000000000000000000000000
   costToTravel: 000000000000000000000000
   connectionParent: {fileID: 6774134851872800165}
@@ -4698,7 +4708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851684932908
 MonoBehaviour:
@@ -5099,7 +5110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect:
   - {fileID: 6774134852034043084}
-  timeToTravel: 3c000000
+  timeToTravel: 1e000000
   nodeConnectionTypes: 00000000
   costToTravel: 00000000
   connectionParent: {fileID: 6774134852082965950}
@@ -5117,7 +5128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851714907265
 MonoBehaviour:
@@ -5439,7 +5451,7 @@ MonoBehaviour:
   nodesToConnect:
   - {fileID: 6774134852858798577}
   - {fileID: 6774134851043994025}
-  timeToTravel: 9f00000072000000
+  timeToTravel: 4f00000039000000
   nodeConnectionTypes: 0000000000000000
   costToTravel: 0000000000000000
   connectionParent: {fileID: 6774134851818306685}
@@ -5457,7 +5469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851815938297
 MonoBehaviour:
@@ -6073,7 +6086,7 @@ MonoBehaviour:
   nodesToConnect:
   - {fileID: 6774134851180738123}
   - {fileID: 6774134851669515589}
-  timeToTravel: 7700000098000000
+  timeToTravel: 3b0000004c000000
   nodeConnectionTypes: 0000000000000000
   costToTravel: 0000000000000000
   connectionParent: {fileID: 6774134851946214175}
@@ -6091,7 +6104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851939069764
 MonoBehaviour:
@@ -6335,7 +6349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect:
   - {fileID: 6774134852726497131}
-  timeToTravel: 47000000
+  timeToTravel: 23000000
   nodeConnectionTypes: 00000000
   costToTravel: 00000000
   connectionParent: {fileID: 6774134851497123618}
@@ -6353,7 +6367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851957147930
 MonoBehaviour:
@@ -6569,7 +6584,7 @@ MonoBehaviour:
   - {fileID: 6774134851684932914}
   - {fileID: 6774134852858798577}
   - {fileID: 6774134850793076633}
-  timeToTravel: c8000000b7000000c5000000
+  timeToTravel: 640000005b00000062000000
   nodeConnectionTypes: 000000000000000000000000
   costToTravel: 000000000000000000000000
   connectionParent: {fileID: 6774134852724071964}
@@ -6587,7 +6602,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134851968999016
 MonoBehaviour:
@@ -6832,7 +6848,7 @@ MonoBehaviour:
   nodesToConnect:
   - {fileID: 6774134852116156605}
   - {fileID: 6774134851714907271}
-  timeToTravel: 9f0000003c000000
+  timeToTravel: 4f0000001e000000
   nodeConnectionTypes: 0000000000000000
   costToTravel: 0000000000000000
   connectionParent: {fileID: 6774134852362573423}
@@ -6850,7 +6866,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134852034043086
 MonoBehaviour:
@@ -7139,7 +7156,7 @@ MonoBehaviour:
   nodesToConnect:
   - {fileID: 6774134852116156605}
   - {fileID: 6774134851180738123}
-  timeToTravel: 83000000ab000000
+  timeToTravel: 4100000055000000
   nodeConnectionTypes: 0000000000000000
   costToTravel: 0000000000000000
   connectionParent: {fileID: 6774134852298810857}
@@ -7157,7 +7174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134852053290038
 MonoBehaviour:
@@ -7661,7 +7679,7 @@ MonoBehaviour:
   - {fileID: 6774134851180738123}
   - {fileID: 6774134852034043084}
   - {fileID: 6774134852053290036}
-  timeToTravel: ba0000009f00000083000000
+  timeToTravel: 5d0000004f00000041000000
   nodeConnectionTypes: 000000000000000000000000
   costToTravel: 000000000000000000000000
   connectionParent: {fileID: 6774134852650529783}
@@ -7679,7 +7697,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134852116156607
 MonoBehaviour:
@@ -8508,7 +8527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesToConnect:
   - {fileID: 6774134852799287231}
-  timeToTravel: 93000000
+  timeToTravel: 49000000
   nodeConnectionTypes: 00000000
   costToTravel: 00000000
   connectionParent: {fileID: 6774134851602392336}
@@ -8526,7 +8545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134852441994733
 MonoBehaviour:
@@ -9848,7 +9868,7 @@ MonoBehaviour:
   - {fileID: 6774134851684932914}
   - {fileID: 6774134851957147928}
   - {fileID: 6774134851133377327}
-  timeToTravel: 490000004700000088000000
+  timeToTravel: 240000002300000044000000
   nodeConnectionTypes: 000000000000000000000000
   costToTravel: 000000000000000000000000
   connectionParent: {fileID: 6774134852499767168}
@@ -9866,7 +9886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134852726497125
 MonoBehaviour:
@@ -10156,7 +10177,7 @@ MonoBehaviour:
   - {fileID: 6774134851123287184}
   - {fileID: 6774134851021122391}
   - {fileID: 6774134852441994738}
-  timeToTravel: 880000008c00000093000000
+  timeToTravel: 440000004600000049000000
   nodeConnectionTypes: 000000000000000000000000
   costToTravel: 000000000000000000000000
   connectionParent: {fileID: 6774134851208824760}
@@ -10174,7 +10195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134852799287225
 MonoBehaviour:
@@ -10357,7 +10379,7 @@ MonoBehaviour:
   - {fileID: 6774134851815938303}
   - {fileID: 6774134851018066353}
   - {fileID: 6774134851968999022}
-  timeToTravel: 9f000000b5000000b7000000
+  timeToTravel: 4f0000005a0000005b000000
   nodeConnectionTypes: 000000000000000000000000
   costToTravel: 000000000000000000000000
   connectionParent: {fileID: 6774134851468827963}
@@ -10375,7 +10397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7ca4a16b7a8af44bd921e7cbe47e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avaliableTradeGoods: 000000000100000002000000
+  tradeGoodsToBuy: 
+  tradeGoodsToSell: 00000000
   avalaibleEngineUpgrades: 
 --- !u!114 &6774134852858798579
 MonoBehaviour:

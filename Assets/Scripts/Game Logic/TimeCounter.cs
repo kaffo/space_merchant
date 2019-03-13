@@ -8,6 +8,7 @@ public class TimeCounter : Singleton<TimeCounter>
     public Text timeText;
     public Text fatherHealthText;
     public ClickToContinuePopup popupScript;
+    public int initialTimeToPass = 100;
     public bool gameOver = false;
 
     private int timeLeft = 250;
@@ -21,6 +22,12 @@ public class TimeCounter : Singleton<TimeCounter>
             Debug.LogError(this.name + " setup error!");
             this.enabled = false;
             return;
+        }
+        if (initialTimeToPass > 0)
+        {
+            timeLeft += initialTimeToPass;
+            PassTime(initialTimeToPass);
+            timePassed = 0;
         }
         UpdateUI();
     }
@@ -67,7 +74,7 @@ public class TimeCounter : Singleton<TimeCounter>
         }
     }
 
-    public void passTime(int timeToPass)
+    public void PassTime(int timeToPass)
     {
         if (!gameOver)
         {

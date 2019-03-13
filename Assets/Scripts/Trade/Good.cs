@@ -220,7 +220,7 @@ public class Good : MonoBehaviour
             setBuyPrice(buyPrice + (int)((float)buyPrice / 100f * 10f));
 
             // Pass time for each unit bought
-            TimeCounter.Instance.passTime(quantity);
+            TimeCounter.Instance.PassTime(quantity);
 
             // Disable any outlines to avoid player confusion
             foreach (var goodScript in ObjectManager.Instance.globalGoodList)
@@ -250,7 +250,7 @@ public class Good : MonoBehaviour
             PlayerCargo.Instance.RemoveSingleCargo(myGood);
             Debug.Log("Sold " + quantity + " " + Defs.Instance.goodNames[myGood] + " for $" + sellPrice * quantity);
             setSellPrice(sellPrice - (int)((float)sellPrice / 100f * 10f));
-            TimeCounter.Instance.passTime(quantity);
+            TimeCounter.Instance.PassTime(quantity);
             return true;
         } else
         {

@@ -67,8 +67,9 @@ public class NodeUILogicSetup : MonoBehaviour
         jumpButton = myPanelReferenceScript.jumpButton;
         goodsParent = myPanelReferenceScript.goodsParent;
         nodeNameText = myPanelReferenceScript.nodeNameText;
-
-        if (jumpButton == null || nodeNameText == null || goodsParent == null)
+        RectTransform panelTransform = myPanelReferenceScript.panelTransfrom;
+        
+        if (jumpButton == null || nodeNameText == null || goodsParent == null || panelTransform == null)
         {
             Debug.LogError(gameObject.name + " UI setup script is invalid");
             this.enabled = false;
@@ -161,6 +162,9 @@ public class NodeUILogicSetup : MonoBehaviour
             // Setup the click logic
             buyButton.onClick.AddListener(() => UpgradeBuyButtonClicked(upgradeScript));
         }
+
+        // Dynamically size panel to number of goods/upgrades
+        panelTransform.sizeDelta = new Vector2(panelTransform.sizeDelta.x, currentHeight + 150f);
     }
 
     private void CreateGoodsList(List<(Defs.TradeGoods, Defs.TradeGoodTypes)> goodsToAdd)
@@ -236,7 +240,7 @@ public class NodeUILogicSetup : MonoBehaviour
 
                     // Work out the time to pass based off the distance and the engine speed
                     int timeToPass = connectionScriptToMe.GetCurrentJumpCost();
-                    TimeCounter.Instance.passTime(timeToPass);
+                    TimeCounter.Instance.PassTime(timeToPass);
                 } else
                 {
                     Debug.LogError("Error getting Current Active Node Connections on " + transform.parent.name);
