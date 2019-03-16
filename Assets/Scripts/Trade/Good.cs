@@ -39,14 +39,15 @@ public class Good : MonoBehaviour
         ObjectManager.Instance.globalGoodList.Add(this);
 
         // Determine Starting Buy Price
-        float startPrice = Defs.Instance.goodStartPrice[myGood];
+        float startBuyPrice = Defs.Instance.goodStartBuyPrice[myGood];
+        float startSellPrice = Defs.Instance.goodStartSellPrice[myGood];
         float pDifference = Defs.Instance.goodPriceDifference[myGood];
         float minPrice = Defs.Instance.goodMinPrice[myGood];
         float maxPrice = Defs.Instance.goodMaxPrice[myGood];
-        buyPrice = (int)Mathf.Clamp(Mathf.Floor(Random.Range(startPrice - pDifference, startPrice + pDifference)), minPrice, maxPrice);
+        buyPrice = (int)Mathf.Clamp(Mathf.Floor(Random.Range(startBuyPrice - pDifference, startBuyPrice + pDifference)), minPrice, maxPrice);
 
         // Determine Starting Sell Price
-        sellPrice = (int)Mathf.Clamp(Mathf.Floor(Random.Range(startPrice - pDifference, startPrice + pDifference)), minPrice, maxPrice);
+        sellPrice = (int)Mathf.Clamp(Mathf.Floor(Random.Range(startSellPrice - pDifference, startSellPrice + pDifference)), minPrice, maxPrice);
 
         // Determine Starting Price
         int startQuatity = Defs.Instance.goodStartQuantity[myGood];

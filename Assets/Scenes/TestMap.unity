@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupLetterText: {fileID: 1663714962}
-  mapGameObject: {fileID: 500287818}
+  mapGameObject: {fileID: 0}
 --- !u!1 &87926097
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,13 +743,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 500287819}
+  - component: {fileID: 500287820}
   m_Layer: 0
   m_Name: TestMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &500287819
 Transform:
   m_ObjectHideFlags: 0
@@ -772,6 +773,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &500287820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500287818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc71dd69ff785ee41968b2bc7b4e9c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startNode: {fileID: 6770783619514157450}
+  initialTimeToPass: 250
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3237,12 +3252,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2066189204}
   - component: {fileID: 2066189203}
-  - component: {fileID: 2066189205}
-  - component: {fileID: 2066189206}
-  - component: {fileID: 2066189207}
-  - component: {fileID: 2066189208}
-  - component: {fileID: 2066189209}
   - component: {fileID: 2066189210}
+  - component: {fileID: 2066189206}
+  - component: {fileID: 2066189205}
+  - component: {fileID: 2066189209}
+  - component: {fileID: 2066189208}
+  - component: {fileID: 2066189207}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -3262,8 +3277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c996a9e3dc1eba44ac66197ec480b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startNode: {fileID: 6770783619514157450}
   letterStartScript: {fileID: 64764955}
+  mapToLoad: {fileID: 500287818}
 --- !u!4 &2066189204
 Transform:
   m_ObjectHideFlags: 0
@@ -3287,29 +3302,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2066189202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 670bed6d03e634d4cbf62e633df022d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeText: {fileID: 1442147402}
-  fatherHealthText: {fileID: 1472779071}
-  popupScript: {fileID: 64764955}
-  initialTimeToPass: 100
-  gameOver: 0
---- !u!114 &2066189206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066189202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a40bcefa016e8e74ca0ef10e7b06326c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingCash: 989
   moneyText: {fileID: 1141929942}
---- !u!114 &2066189207
+--- !u!114 &2066189206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3323,7 +3321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 6
   cargoText: {fileID: 1303344094}
---- !u!114 &2066189208
+--- !u!114 &2066189207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3335,7 +3333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d3ac565dc3d124ba8470ed95e58810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2066189209
+--- !u!114 &2066189208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3351,6 +3349,22 @@ MonoBehaviour:
   globalNodeList: []
   globalGoodList: []
   globalUpgradeList: []
+--- !u!114 &2066189209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066189202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670bed6d03e634d4cbf62e633df022d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeText: {fileID: 1442147402}
+  fatherHealthText: {fileID: 1472779071}
+  popupScript: {fileID: 64764955}
+  gameOver: 0
 --- !u!114 &2066189210
 MonoBehaviour:
   m_ObjectHideFlags: 0

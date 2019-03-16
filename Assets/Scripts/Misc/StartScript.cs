@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class StartScript : MonoBehaviour
 {
-    public ActiveNode startNode;
+    [Header("References")]
     public ClickToContinuePopup letterStartScript;
+    public GameObject mapToLoad;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (startNode)
+        if (mapToLoad == null || letterStartScript == null)
         {
-            startNode.setActive(true);
-            ObjectManager.Instance.currentActiveNode = startNode;
+            Debug.LogError("Setup Script Error!!");
+            this.enabled = false;
+            return;
         }
 
-        if (letterStartScript != null)
-        {
-            letterStartScript.SetupLetter(null);
-        }
+        letterStartScript.mapGameObject = mapToLoad;
+        letterStartScript.SetupLetter(null);
     }
 }

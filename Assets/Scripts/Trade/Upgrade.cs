@@ -9,6 +9,7 @@ public class Upgrade : MonoBehaviour
     public Defs.EngineUpgrades upgrade;
 
     [Header("UI Elements")]
+    public Text upgradeNameText;
     public Text buyText;
     public Button buyButton;
 
@@ -16,8 +17,6 @@ public class Upgrade : MonoBehaviour
     public ActiveNode activeNodeScript;
 
     private int buyPrice;
-
-    private Text upgradeText;
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +38,7 @@ public class Upgrade : MonoBehaviour
         buyPrice = (int)Mathf.Floor(Random.Range(startPrice - pDifference, startPrice + pDifference));*/
         buyPrice = (int)startPrice;
 
-        // Grab the text element
-        Transform buttonTextTransform = transform.GetChild(0);
-        upgradeText = buttonTextTransform.GetComponent<Text>();
-        if (upgradeText == null || buyText == null || buyButton == null)
+        if (upgradeNameText == null || buyText == null || buyButton == null)
         {
             Debug.LogError("Button Text can't be found on " + gameObject.name);
             this.enabled = false;
@@ -55,7 +51,7 @@ public class Upgrade : MonoBehaviour
     public void updateUI()
     {
         // Set upgrade text
-        upgradeText.text = Defs.Instance.engineUpgradesNames[upgrade];
+        upgradeNameText.text = Defs.Instance.engineUpgradesNames[upgrade];
 
         // Set buy text and button state
         buyText.text = "$" + buyPrice;

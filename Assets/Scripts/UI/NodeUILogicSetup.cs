@@ -20,6 +20,7 @@ public class NodeUILogicSetup : MonoBehaviour
     public ActiveNode nodeScript;
     public NodeConnections myConnections;
     public NodeClick nodeClickScript;
+    public NodeGoodSetup nodeGoodSetup;
 
     [Header("Prefabs")]
     public GameObject goodsUIParent;
@@ -41,7 +42,8 @@ public class NodeUILogicSetup : MonoBehaviour
         }
 
         if (nodeParametersScript == null || nodeScript == null || myConnections == null || goodsUIParent == null || panelPrefab == null
-            || upgradeUIParent == null || panelCanvasParentObject == null || nodeNameCanvasObject  == null || nodeClickScript == null || nodeNamePrefab == null)
+            || upgradeUIParent == null || panelCanvasParentObject == null || nodeNameCanvasObject  == null || nodeClickScript == null || nodeNamePrefab == null
+            || nodeGoodSetup == null)
         {
             Debug.LogError(gameObject.name + " UI setup script is invalid");
             this.enabled = false;
@@ -108,29 +110,12 @@ public class NodeUILogicSetup : MonoBehaviour
                 return;
             }
 
-            // Set the Good script up
-            Good goodScript = Defs.Instance.AddGoodScript(good, goodsPrefab);
-            if (goodScript != null) {
-                goodScript.myGood = good;
-                goodScript.myGoodType = goodType;
-                goodScript.activeNodeScript = nodeScript;
-                goodScript.myUIReferences = goodUIReferences;
-                goodScript.enabled = true;
-            }
+            // Set the Good details on the reference script so the NodeSetupScript can create Good Scripts
+            goodUIReferences.myGood = good;
+            goodUIReferences.myGoodType = goodType;
 
-            Button buyButton = goodUIReferences.buyButton;
-            Button sellButton = goodUIReferences.sellButton;
-
-            if (buyButton == null || sellButton == null)
-            {
-                Debug.LogError("Button setup error on " + gameObject.name);
-                this.enabled = false;
-                return;
-            }
-
-            // Setup the click logic
-            buyButton.onClick.AddListener(() => GoodsBuyButtonClicked(goodScript));
-            sellButton.onClick.AddListener(() => GoodsSellButtonClicked(goodScript));
+            // Add the Reference Script to the Setup Script
+            nodeGoodSetup.myGoodUIReferencesList.Add(goodUIReferences);
         }
 
         foreach (Defs.EngineUpgrades engineUpgrade in nodeParametersScript.avalaibleEngineUpgrades)
@@ -141,26 +126,18 @@ public class NodeUILogicSetup : MonoBehaviour
             upgradePrefab.transform.localPosition = new Vector3(0f, -currentHeight, 0f);
             currentHeight += 80f; //TODO make this not static
 
-            // Set the Good script up
-            Upgrade upgradeScript = upgradePrefab.GetComponent<Upgrade>();
-            if (upgradeScript != null)
+            UpgradeUIReferences upgradeUIReferences = upgradePrefab.GetComponent<UpgradeUIReferences>();
+            if (upgradeUIReferences == null)
             {
-                upgradeScript.upgrade = engineUpgrade;
-                upgradeScript.activeNodeScript = nodeScript;
-                upgradeScript.enabled = true;
-            }
-
-            Button buyButton = upgradeScript.buyButton;
-
-            if (buyButton == null)
-            {
-                Debug.LogError("Button setup error on " + gameObject.name);
+                Debug.LogError("Setup error on " + gameObject.name);
                 this.enabled = false;
                 return;
             }
 
-            // Setup the click logic
-            buyButton.onClick.AddListener(() => UpgradeBuyButtonClicked(upgradeScript));
+            upgradeUIReferences.upgrade = engineUpgrade;
+
+            // Add the Reference Script to the Setup Script
+            nodeGoodSetup.myUpgradeReferencesList.Add(upgradeUIReferences);
         }
 
         // Dynamically size panel to number of goods/upgrades
@@ -262,20 +239,5 @@ public class NodeUILogicSetup : MonoBehaviour
                 upgrade.updateUI();
             }
         }
-    }
-
-    private void GoodsBuyButtonClicked(Good goodScript)
-    {
-        goodScript.BuyGood(1);
-    }
-
-    private void GoodsSellButtonClicked(Good goodScript)
-    {
-        goodScript.SellGood(1);
-    }
-
-    private void UpgradeBuyButtonClicked(Upgrade upgradeScript)
-    {
-        upgradeScript.BuyUpgrade();
     }
 }
