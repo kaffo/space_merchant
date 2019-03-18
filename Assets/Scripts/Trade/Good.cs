@@ -13,17 +13,17 @@ public class Good : MonoBehaviour
     public ActiveNode activeNodeScript;
     public GoodUIReferences myUIReferences;
 
-    private int buyPrice;
-    private int sellPrice;
-    private int buyQuantity;
-    private int sellQuantity;
+    protected int buyPrice;
+    protected int sellPrice;
+    protected int buyQuantity;
+    protected int sellQuantity;
 
-    private Text goodText;
-    private Text buyText;
-    private Button buyButton;
-    private Text sellText;
-    private Button sellButton;
-    private Outline sellButtonOutline;
+    protected Text goodText;
+    protected Text buyText;
+    protected Button buyButton;
+    protected Text sellText;
+    protected Button sellButton;
+    protected Outline sellButtonOutline;
 
     // Start is called before the first frame update
     void Start()
@@ -276,7 +276,8 @@ public class Good : MonoBehaviour
         sellButtonOutline.enabled = valueToSet;
     }
 
-    public IEnumerator StepEconomy(int timesToStep = 1)
+    // Default Good Economy Step
+    public virtual IEnumerator StepEconomy(int timesToStep = 1)
     {
         for (int i = 0; i < timesToStep; i++)
         {
